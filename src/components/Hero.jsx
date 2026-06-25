@@ -39,7 +39,9 @@ export default function Hero() {
       ref={containerRef}
       className="hero" 
       style={{
+        height: '100vh',
         minHeight: '100vh',
+        maxHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -48,7 +50,7 @@ export default function Hero() {
         background: 'linear-gradient(180deg, #1a3a2a 0%, #1a3a2a 65%, rgba(255, 186, 56, 0.18) 100%)',
         borderBottom: '1.8px solid var(--border)',
         width: '100%',
-        padding: '120px 0 80px'
+        padding: '90px 0 30px'
       }}
     >
       {/* Vercel-style Large Grid Pattern */}
@@ -99,7 +101,7 @@ export default function Hero() {
       }}>
         
         {/* Left: Content */}
-        <div className="hero-text-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%', maxWidth: '500px', alignSelf: 'flex-start', marginTop: '0px' }}>
+        <div className="hero-text-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%', maxWidth: '500px', alignSelf: 'start', marginTop: '0px' }}>
           
           {/* Header matching Reference Image 2 exactly */}
           <motion.h1 
@@ -157,7 +159,7 @@ export default function Hero() {
         </div>
 
         {/* Right: Mockup — rendered as a single pixel-perfect transparent image from reference */}
-        <div className="mock-wrap" style={{ position: 'relative', width: '100%', justifySelf: 'end', marginTop: '240px' }}>
+        <div className="mock-wrap" style={{ position: 'relative', width: '100%', justifySelf: 'end', marginTop: '130px' }}>
           {/* Thick golden glow behind the mockup area using user hex #ffba38 */}
           <div className="mockup-bg-glow" style={{
             position: 'absolute',
@@ -223,25 +225,28 @@ export default function Hero() {
       <style>{`
         @media (min-width: 981px) {
           .hero {
+            height: 100vh !important;
             min-height: 100vh !important;
-            padding: 110px 0 60px !important;
+            max-height: 100vh !important;
+            padding: 90px 0 30px !important;
             display: flex !important;
             flex-direction: column !important;
             justify-content: center !important;
+            overflow: hidden !important;
           }
           .hero-grid {
             align-items: start !important;
           }
           .mock-wrap {
-            margin-top: 240px !important;
+            margin-top: 130px !important;
           }
           .hero-text-col {
-            align-self: flex-start !important;
+            align-self: start !important;
             margin-top: 0 !important;
           }
           .mockup-img-container {
             max-width: 840px !important;
-            margin-left: 0px !important;
+            margin-left: -90px !important;
             margin-right: 0 !important;
           }
         }
