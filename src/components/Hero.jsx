@@ -78,7 +78,7 @@ export default function Hero() {
         width: '580px',
         height: '580px',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(180, 135, 75, 0.32) 0%, rgba(180, 135, 75, 0.1) 60%, transparent 80%)',
+        background: 'radial-gradient(circle, rgba(212, 175, 55, 0.35) 0%, rgba(212, 175, 55, 0.12) 60%, transparent 80%)',
         filter: 'blur(90px)',
         pointerEvents: 'none',
         zIndex: 1
@@ -86,7 +86,7 @@ export default function Hero() {
 
       <div className="wrap hero-grid" style={{
         display: 'grid',
-        gridTemplateColumns: '1.25fr 0.95fr',
+        gridTemplateColumns: 'minmax(0, 1.25fr) minmax(0, 0.95fr)',
         gap: '60px',
         alignItems: 'start',
         position: 'relative',
@@ -153,20 +153,49 @@ export default function Hero() {
 
         {/* Right: Mockup — positioned to start at paragraph level and extend below */}
         <div className="mock-wrap" style={{ position: 'relative', width: '100%', justifySelf: 'end', marginTop: '35px' }}>
-          {/* Golden glow at the top edge of the mockup */}
-          <div className="mockup-top-glow" style={{
+          {/* Subtle golden glow behind the mockup area */}
+          <div className="mockup-bg-glow" style={{
             position: 'absolute',
-            top: '-70px',
-            left: '15%',
-            width: '70%',
-            height: '180px',
-            background: 'radial-gradient(ellipse at center, rgba(180, 135, 75, 0.28) 0%, rgba(180, 135, 75, 0.08) 60%, transparent 80%)',
-            filter: 'blur(45px)',
+            left: '10%',
+            top: '10%',
+            width: '80%',
+            height: '80%',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(212, 175, 55, 0.35) 0%, rgba(212, 175, 55, 0.12) 60%, transparent 80%)',
+            filter: 'blur(80px)',
             pointerEvents: 'none',
             zIndex: 1
           }} />
+
+          {/* Golden glow at the top edge of the mockup */}
+          <div className="mockup-top-glow" style={{
+            position: 'absolute',
+            top: '-80px',
+            left: '15%',
+            width: '70%',
+            height: '180px',
+            background: 'radial-gradient(ellipse at center, rgba(212, 175, 55, 0.38) 0%, rgba(212, 175, 55, 0.15) 50%, transparent 75%)',
+            filter: 'blur(50px)',
+            pointerEvents: 'none',
+            zIndex: 1
+          }} />
+
+          {/* Rich golden glow behind the bottom-left of the mockup */}
+          <div className="mockup-bottom-left-glow" style={{
+            position: 'absolute',
+            left: '-80px',
+            bottom: '20px',
+            width: '320px',
+            height: '320px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(212, 175, 55, 0.45) 0%, rgba(212, 175, 55, 0.18) 50%, transparent 75%)',
+            filter: 'blur(50px)',
+            pointerEvents: 'none',
+            zIndex: 1
+          }} />
+
           <motion.div 
-            style={{ y: yParallax, position: 'relative', zIndex: 2 }}
+            style={{ y: yParallax, position: 'relative', zIndex: 2, maxWidth: '510px', marginLeft: 'auto', marginRight: '0' }}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
@@ -177,7 +206,8 @@ export default function Hero() {
               borderRadius: '14px',
               overflow: 'hidden',
               boxShadow: '0 25px 60px rgba(0,0,0,0.4)',
-              width: '100%'
+              width: '100%',
+              position: 'relative'
             }}>
               {/* Browser top bar */}
               <div className="browser-bar" style={{
@@ -242,7 +272,7 @@ export default function Hero() {
                 {/* Hero area within preview */}
                 <div style={{
                   display: 'grid',
-                  gridTemplateColumns: '1fr 1.1fr',
+                  gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1.15fr)',
                   padding: '24px 18px',
                   gap: '16px',
                   alignItems: 'center'
@@ -302,75 +332,75 @@ export default function Hero() {
                 </div>
               </div>
             </div>
-          </motion.div>
 
-          {/* Floating notification chip matching Image 1 */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8, x: 50 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.8 }}
-            className="notify-chip"
-            style={{
-              position: 'absolute',
-              left: '-24px',
-              bottom: '70px',
-              background: '#FFFFFF',
-              border: '1.5px solid rgba(0, 0, 0, 0.1)',
-              borderRadius: '8px',
-              padding: '10px 16px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              boxShadow: '0 8px 30px rgba(0,0,0,0.15)',
-              fontSize: '0.82rem',
-              color: '#1C1E1A',
-              fontWeight: 500,
-              zIndex: 3
-            }}
-          >
-            {/* Avatar circle */}
-            <div style={{
-              width: '24px',
-              height: '24px',
-              borderRadius: '50%',
-              background: 'var(--brass-soft)',
-              color: 'var(--green-deep)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontWeight: 700,
-              fontSize: '0.7rem'
-            }}>
-              👤
-            </div>
-            <span>Client opened your preview</span>
-          </motion.div>
+            {/* Floating notification chip matching Image 1 */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8, x: 50 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.8 }}
+              className="notify-chip"
+              style={{
+                position: 'absolute',
+                left: '-24px',
+                bottom: '120px',
+                background: '#FFFFFF',
+                border: '1.5px solid rgba(0, 0, 0, 0.1)',
+                borderRadius: '8px',
+                padding: '10px 16px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                boxShadow: '0 8px 30px rgba(0,0,0,0.15)',
+                fontSize: '0.82rem',
+                color: '#1C1E1A',
+                fontWeight: 500,
+                zIndex: 3
+              }}
+            >
+              {/* Avatar circle */}
+              <div style={{
+                width: '24px',
+                height: '24px',
+                borderRadius: '50%',
+                background: 'var(--brass-soft)',
+                color: 'var(--green-deep)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 700,
+                fontSize: '0.7rem'
+              }}>
+                👤
+              </div>
+              <span>Client opened your preview</span>
+            </motion.div>
 
-          {/* Floating link badge under the mockup */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1 }}
-            className="link-chip"
-            style={{
-              position: 'absolute',
-              right: '24px',
-              bottom: '-22px',
-              background: 'var(--surface)',
-              color: 'var(--cream)',
-              border: '1.8px solid var(--border)',
-              borderRadius: '8px',
-              padding: '8px 16px',
-              fontFamily: "'IBM Plex Mono', monospace",
-              fontSize: '0.74rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              boxShadow: '0 8px 25px rgba(0,0,0,0.2)',
-              zIndex: 3
-            }}
-          >
-            🔗 Shareable preview link
+            {/* Floating link badge under the mockup */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1 }}
+              className="link-chip"
+              style={{
+                position: 'absolute',
+                right: '24px',
+                bottom: '-22px',
+                background: 'var(--surface)',
+                color: 'var(--cream)',
+                border: '1.8px solid var(--border)',
+                borderRadius: '8px',
+                padding: '8px 16px',
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '0.74rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                boxShadow: '0 8px 25px rgba(0,0,0,0.2)',
+                zIndex: 3
+              }}
+            >
+              🔗 Shareable preview link
+            </motion.div>
           </motion.div>
         </div>
       </div>
