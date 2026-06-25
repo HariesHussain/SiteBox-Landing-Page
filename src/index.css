@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
 :root {
   --bg: #07130F;               /* Dark forest green background */
   --bg-light: #F6F4EF;         /* Light cream background for sections */
@@ -68,8 +70,14 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
-p, span, a, button, li, label {
+p, a, button, li, label {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Fix span inheriting global Inter font overriding headings */
+span {
+  font-family: inherit;
+  font-weight: inherit;
 }
 
 .serif {
@@ -199,24 +207,27 @@ p, span, a, button, li, label {
   color: var(--ink-soft-light);
 }
 
-/* Vercel Grid Pattern */
-.grid-bg-overlay {
+/* Check Grid Pattern (Bottom Left / Top Right alignment) */
+.check-grid {
   position: absolute;
-  inset: 0;
-  pointer-events: none;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
   z-index: 1;
 }
 
-.light-theme .grid-bg-overlay {
-  background-image: 
-    linear-gradient(to right, rgba(28, 30, 26, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(28, 30, 26, 0.03) 1px, transparent 1px);
-  mask-image: radial-gradient(ellipse at center, black 60%, transparent 95%);
+/* Vercel-style Dot Grid Pattern (fades towards edges) */
+.grid-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 1;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
 }
 
 /* Strong Border Cards */

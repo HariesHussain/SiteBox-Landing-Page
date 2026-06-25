@@ -31,8 +31,7 @@ export default function Hero() {
     }
   };
 
-  const firstLine = "Build the site. ".split(" ");
-  const firstSkip = "Skip".split(" ");
+  const firstLine = "Build the site.".split(" ");
   const secondLine = "Skip the chaos.".split(" ");
 
   return (
@@ -51,6 +50,26 @@ export default function Hero() {
       {/* Vercel-style Large Grid Pattern */}
       <div className="grid-bg-overlay" />
 
+      {/* Background checks / grid texture */}
+      <div className="check-grid" style={{ 
+        left: 0, 
+        bottom: 0, 
+        width: '450px', 
+        height: '450px', 
+        opacity: 0.8, 
+        maskImage: 'radial-gradient(circle at bottom left, black 25%, transparent 75%)', 
+        WebkitMaskImage: 'radial-gradient(circle at bottom left, black 25%, transparent 75%)' 
+      }} />
+      <div className="check-grid" style={{ 
+        right: 0, 
+        top: 0, 
+        width: '450px', 
+        height: '450px', 
+        opacity: 0.8, 
+        maskImage: 'radial-gradient(circle at top right, black 25%, transparent 75%)', 
+        WebkitMaskImage: 'radial-gradient(circle at top right, black 25%, transparent 75%)' 
+      }} />
+
       <div className="wrap hero-grid" style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
@@ -61,7 +80,7 @@ export default function Hero() {
       }}>
         
         {/* Left: Content */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%' }}>
+        <div className="hero-text-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%' }}>
           <motion.p 
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
@@ -93,14 +112,6 @@ export default function Hero() {
                 </motion.span>
               </span>
             ))}
-            <span style={{ display: 'inline-block', marginRight: '0.22em' }}>
-              <motion.span 
-                variants={wordVariants} 
-                style={{ display: 'inline-block', color: 'var(--brass)', fontStyle: 'italic', fontWeight: 400 }}
-              >
-                {firstSkip}
-              </motion.span>
-            </span>
             <br />
             <span style={{ display: 'inline-block', color: 'var(--brass)', fontStyle: 'italic', fontWeight: 400 }}>
               {secondLine.map((word, i) => (
@@ -342,6 +353,20 @@ export default function Hero() {
       </div>
 
       <style>{`
+        @media (min-width: 981px) {
+          .hero {
+            padding: 120px 0 170px !important;
+          }
+          .hero-grid {
+            align-items: start !important;
+          }
+          .mock-wrap {
+            transform: translateY(110px) !important;
+          }
+          .hero-text-col {
+            margin-top: 20px;
+          }
+        }
         @media (max-width: 980px) {
           .hero-grid {
             grid-template-columns: 1fr !important;
