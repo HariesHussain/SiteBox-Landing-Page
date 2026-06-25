@@ -40,10 +40,12 @@ export default function Hero() {
       ref={containerRef}
       className="hero" 
       style={{
-        padding: '160px 0 110px',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'stretch',
         position: 'relative',
         overflow: 'hidden',
-        background: 'linear-gradient(180deg, #07130F 0%, #0c2018 55%, #c8a96e 100%)',
+        background: 'linear-gradient(to bottom, #1a3a2a 0%, #1a3a2a 70%, rgba(138, 122, 74, 0.4) 100%), #1a3a2a',
         borderBottom: '1.8px solid var(--border)',
         width: '100%'
       }}
@@ -71,31 +73,39 @@ export default function Hero() {
         WebkitMaskImage: 'radial-gradient(circle at top right, black 25%, transparent 75%)' 
       }} />
 
-      {/* Premium Golden Glow behind the mockup and bottom-left area matching Reference Image 2 */}
+      {/* Muted Golden Glow matching the muted warm olive-tan request */}
       <div className="hero-gold-glow" style={{
         position: 'absolute',
         left: '20%',
         bottom: '-5%',
-        width: '620px',
-        height: '620px',
+        width: '600px',
+        height: '600px',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(168, 121, 62, 0.45) 0%, rgba(168, 121, 62, 0.1) 60%, transparent 80%)',
-        filter: 'blur(90px)',
+        background: 'radial-gradient(circle, rgba(138, 122, 74, 0.22) 0%, transparent 80%)',
+        filter: 'blur(100px)',
         pointerEvents: 'none',
         zIndex: 1
       }} />
 
       <div className="wrap hero-grid" style={{
-        display: 'grid',
-        gridTemplateColumns: '0.9fr 1.1fr',
-        gap: '48px',
-        alignItems: 'center',
+        display: 'flex',
+        alignItems: 'flex-start',
+        justifyContent: 'space-between',
         position: 'relative',
-        zIndex: 2
+        zIndex: 2,
+        width: '100%'
       }}>
         
-        {/* Left: Content */}
-        <div className="hero-text-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%', maxWidth: '480px' }}>
+        {/* Left: Content (Top-aligned, starting 130px from top of page) */}
+        <div className="hero-text-col" style={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'flex-start', 
+          alignSelf: 'flex-start', 
+          paddingTop: '130px', 
+          width: '100%', 
+          maxWidth: '480px' 
+        }}>
           
           {/* Header matching Reference Image 2 exactly */}
           <motion.h1 
@@ -104,7 +114,7 @@ export default function Hero() {
             animate="visible"
             className="serif" 
             style={{
-              fontSize: 'clamp(2.5rem, 5.2vw, 4.5rem)',
+              fontSize: 'clamp(2.3rem, 4.4vw, 3.8rem)',
               fontWeight: 500,
               lineHeight: 1.05,
               letterSpacing: '-.025em',
@@ -112,30 +122,36 @@ export default function Hero() {
               color: 'var(--ink)'
             }}
           >
-            {line1Normal.map((word, i) => (
-              <span key={i} style={{ display: 'inline-block', marginRight: '0.22em' }}>
-                <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
-                  {word}
-                </motion.span>
+            {/* Line 1 - Forced inline using whiteSpace: 'nowrap' */}
+            <span style={{ display: 'block', whiteSpace: 'nowrap' }}>
+              {line1Normal.map((word, i) => (
+                <span key={i} style={{ display: 'inline-block', marginRight: '0.22em' }}>
+                  <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
+                    {word}
+                  </motion.span>
+                </span>
+              ))}
+              <span style={{ display: 'inline-block', color: 'var(--brass)', fontStyle: 'italic', fontWeight: 400 }}>
+                {line1Italic.map((word, i) => (
+                  <span key={i} style={{ display: 'inline-block' }}>
+                    <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
+                      {word}
+                    </motion.span>
+                  </span>
+                ))}
               </span>
-            ))}
-            <span style={{ display: 'inline-block', color: 'var(--brass)', fontStyle: 'italic', fontWeight: 400, marginRight: '0.22em' }}>
-              {line1Italic.map((word, i) => (
-                <span key={i} style={{ display: 'inline-block' }}>
+            </span>
+            <br />
+            {/* Line 2 - Forced inline using whiteSpace: 'nowrap' */}
+            <span style={{ display: 'block', whiteSpace: 'nowrap' }}>
+              {line2Normal.map((word, i) => (
+                <span key={i} style={{ display: 'inline-block', marginRight: '0.22em' }}>
                   <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
                     {word}
                   </motion.span>
                 </span>
               ))}
             </span>
-            <br />
-            {line2Normal.map((word, i) => (
-              <span key={i} style={{ display: 'inline-block', marginRight: '0.22em' }}>
-                <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
-                  {word}
-                </motion.span>
-              </span>
-            ))}
           </motion.h1>
 
           <motion.p 
@@ -368,26 +384,48 @@ export default function Hero() {
 
       <style>{`
         @media (min-width: 981px) {
+          .hero {
+            min-height: 100vh !important;
+            display: flex !important;
+            align-items: stretch !important;
+          }
           .hero-grid {
-            align-items: center !important;
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: flex-start !important;
+            justify-content: space-between !important;
+          }
+          .hero-text-col {
+            align-self: flex-start !important;
+            padding-top: 130px !important;
+            flex: 1 !important;
           }
           .mock-wrap {
-            transform: translateY(40px) !important;
+            align-self: center !important;
+            flex: 1.1 !important;
           }
         }
         @media (max-width: 980px) {
           .hero-grid {
-            grid-template-columns: 1fr !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
             gap: 54px !important;
             text-align: center;
+            padding-top: 110px !important;
+            padding-bottom: 60px !important;
           }
-          .hero-grid > div {
+          .hero-text-col {
             align-items: center !important;
+            align-self: center !important;
+            padding-top: 0 !important;
+            max-width: 500px !important;
           }
           .mock-wrap {
             max-width: 520px;
             width: 100%;
             margin: 40px auto 0 !important;
+            align-self: center !important;
           }
         }
         @media (max-width: 640px) {

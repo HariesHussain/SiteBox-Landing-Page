@@ -15,6 +15,7 @@ export default function Navbar() {
         setScrolled(false);
       }
     };
+    handleScroll(); // Trigger initial scroll check on mount
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -68,7 +69,8 @@ export default function Navbar() {
       zIndex: 50,
       background: scrolled ? 'rgba(7, 19, 15, 0.85)' : 'transparent',
       backdropFilter: scrolled ? 'saturate(140%) blur(12px)' : 'none',
-      borderBottom: scrolled ? '1.8px solid var(--border)' : '1.8px solid transparent',
+      borderBottom: scrolled ? '1.8px solid var(--border)' : 'none',
+      boxShadow: 'none',
       transition: 'background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease'
     }}>
       <nav className="wrap" style={{
@@ -118,9 +120,10 @@ export default function Navbar() {
           gap: '34px',
         }}>
           {[
-            { id: 'features', label: 'Features' },
-            { id: 'pricing', label: 'Pricing' },
-            { id: 'blog', label: 'Blog' }
+            { id: 'why', label: 'Why SiteBox' },
+            { id: 'workflow', label: 'How it works' },
+            { id: 'templates', label: 'Templates' },
+            { id: 'features', label: 'Features' }
           ].map((item) => (
             <li key={item.id}>
               <a
@@ -162,13 +165,8 @@ export default function Navbar() {
           alignItems: 'center',
           gap: '14px',
         }}>
-          <a href="#" className="btn btn-ghost" style={{ 
-            padding: '0.65rem 1.35rem', 
-            fontSize: '0.9rem', 
-            borderColor: 'var(--cream)', 
-            color: 'var(--cream)',
-            background: 'transparent'
-          }}>Get Started</a>
+          <a href="#" className="btn btn-ghost" style={{ padding: '0.65rem 1.3rem', fontSize: '0.9rem' }}>Log in</a>
+          <a href="#" className="btn btn-primary" style={{ padding: '0.65rem 1.3rem', fontSize: '0.9rem' }}>Get Started</a>
         </div>
 
         {/* Mobile Toggle Button */}
@@ -227,9 +225,10 @@ export default function Navbar() {
               gap: '18px'
             }}>
               {[
-                { id: 'features', label: 'Features' },
-                { id: 'pricing', label: 'Pricing' },
-                { id: 'blog', label: 'Blog' }
+                { id: 'why', label: 'Why SiteBox' },
+                { id: 'workflow', label: 'How it works' },
+                { id: 'templates', label: 'Templates' },
+                { id: 'features', label: 'Features' }
               ].map((item) => (
                 <li key={item.id}>
                   <a
@@ -247,15 +246,9 @@ export default function Navbar() {
                   </a>
                 </li>
               ))}
-              <li style={{ display: 'flex', marginTop: '10px' }}>
-                <a href="#" className="btn btn-ghost" style={{ 
-                  flex: 1, 
-                  padding: '0.8rem', 
-                  textAlign: 'center', 
-                  borderColor: 'var(--cream)', 
-                  color: 'var(--cream)',
-                  background: 'transparent' 
-                }}>Get Started</a>
+              <li style={{ display: 'flex', gap: '12px', marginTop: '10px' }}>
+                <a href="#" className="btn btn-ghost" style={{ flex: 1, padding: '0.8rem', textAlign: 'center' }}>Log in</a>
+                <a href="#" className="btn btn-primary" style={{ flex: 1, padding: '0.8rem', textAlign: 'center' }}>Get Started</a>
               </li>
             </ul>
           </motion.div>
@@ -269,6 +262,11 @@ export default function Navbar() {
           }
           .nav-links-mobile-toggle {
             display: flex !important;
+          }
+        }
+        @media (max-width: 680px) {
+          .nav-cta .btn-ghost {
+            display: none !important;
           }
         }
       `}</style>
