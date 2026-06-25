@@ -31,9 +31,9 @@ export default function Hero() {
     }
   };
 
-  const firstLineNormal = "Build the site.".split(" ");
-  const firstLineItalic = "Skip".split(" ");
-  const secondLine = "the chaos.".split(" ");
+  const line1Normal = "Build the site.".split(" ");
+  const line1Italic = "Skip".split(" ");
+  const line2Normal = "Skip the chaos.".split(" ");
 
   return (
     <section 
@@ -43,7 +43,7 @@ export default function Hero() {
         padding: '120px 0 96px',
         position: 'relative',
         overflow: 'hidden',
-        background: 'radial-gradient(circle at 80% 30%, var(--green-glow) 0%, var(--bg) 70%)',
+        background: 'radial-gradient(circle at 85% 20%, #153828 0%, #081611 100%)',
         borderBottom: '1.8px solid var(--border)',
         width: '100%'
       }}
@@ -87,15 +87,15 @@ export default function Hero() {
 
       <div className="wrap hero-grid" style={{
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: '64px',
+        gridTemplateColumns: '1.15fr 0.85fr',
+        gap: '96px',
         alignItems: 'center',
         position: 'relative',
         zIndex: 2
       }}>
         
         {/* Left: Content */}
-        <div className="hero-text-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%' }}>
+        <div className="hero-text-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%', maxWidth: '580px' }}>
           <motion.p 
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
@@ -120,7 +120,7 @@ export default function Hero() {
               color: 'var(--ink)'
             }}
           >
-            {firstLineNormal.map((word, i) => (
+            {line1Normal.map((word, i) => (
               <span key={i} style={{ display: 'inline-block', marginRight: '0.22em' }}>
                 <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
                   {word}
@@ -128,7 +128,7 @@ export default function Hero() {
               </span>
             ))}
             <span style={{ display: 'inline-block', color: 'var(--brass)', fontStyle: 'italic', fontWeight: 400, marginRight: '0.22em' }}>
-              {firstLineItalic.map((word, i) => (
+              {line1Italic.map((word, i) => (
                 <span key={i} style={{ display: 'inline-block' }}>
                   <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
                     {word}
@@ -137,7 +137,7 @@ export default function Hero() {
               ))}
             </span>
             <br />
-            {secondLine.map((word, i) => (
+            {line2Normal.map((word, i) => (
               <span key={i} style={{ display: 'inline-block', marginRight: '0.22em' }}>
                 <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
                   {word}
@@ -163,7 +163,7 @@ export default function Hero() {
         </div>
 
         {/* Right: Mockup */}
-        <div className="mock-wrap" style={{ position: 'relative', width: '100%' }}>
+        <div className="mock-wrap" style={{ position: 'relative', width: '100%', maxWidth: '540px', justifySelf: 'end' }}>
           <motion.div 
             style={{ y: yParallax }}
             initial={{ opacity: 0, y: 40 }}
