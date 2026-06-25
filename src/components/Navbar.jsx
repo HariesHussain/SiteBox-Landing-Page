@@ -4,6 +4,20 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+  const [scrolled, setScrolled] = useState(false);
+
+  // Track scrolled state for transparent-to-solid transition
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Track active section on scroll
   useEffect(() => {
@@ -50,9 +64,10 @@ export default function Navbar() {
       position: 'sticky',
       top: 0,
       zIndex: 50,
-      background: 'rgba(7, 19, 15, 0.85)',
-      backdropFilter: 'saturate(140%) blur(12px)',
-      borderBottom: '1.8px solid var(--border)',
+      background: scrolled ? 'rgba(7, 19, 15, 0.85)' : 'transparent',
+      backdropFilter: scrolled ? 'saturate(140%) blur(12px)' : 'none',
+      borderBottom: scrolled ? '1.8px solid var(--border)' : '1.8px solid transparent',
+      transition: 'background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease'
     }}>
       <nav className="wrap" style={{
         padding: '18px 32px',
@@ -61,7 +76,7 @@ export default function Navbar() {
         justifyContent: 'space-between',
         position: 'relative'
       }}>
-        {/* Logo matching Image 1 */}
+        {/* Logo matching Reference Image 2 */}
         <a href="#" onClick={(e) => handleScrollTo(e, 'root')} className="logo" style={{
           display: 'flex',
           alignItems: 'center',
@@ -70,22 +85,28 @@ export default function Navbar() {
           fontSize: '1.25rem',
           color: 'var(--ink)'
         }}>
-          <span className="logo-mark" style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '8px',
-            background: 'var(--cream)',
-            color: 'var(--green-deep)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontFamily: "'Fraunces', serif",
-            fontWeight: 700,
-            fontSize: '1.1rem',
-            flexShrink: 0,
-            boxShadow: '0 2px 6px rgba(0,0,0,0.1)'
-          }}>S</span>
-          Site<span style={{ color: 'var(--brass)' }}>Box</span>
+          {/* Golden 3D perspective box SVG */}
+          <svg 
+            width="25" 
+            height="25" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="var(--brass)" 
+            strokeWidth="1.8" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            style={{ flexShrink: 0 }}
+          >
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+            <line x1="12" y1="22.08" x2="12" y2="12" />
+          </svg>
+          <span className="serif" style={{
+            fontWeight: 500,
+            fontSize: '1.28rem',
+            color: 'var(--cream)',
+            letterSpacing: '-0.015em'
+          }}>SiteBox</span>
         </a>
 
         {/* Desktop Nav Links (Cream color matching dark green header) */}

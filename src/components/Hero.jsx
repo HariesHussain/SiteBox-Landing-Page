@@ -31,8 +31,9 @@ export default function Hero() {
     }
   };
 
-  const firstLine = "Build the site.".split(" ");
-  const secondLine = "Skip the chaos.".split(" ");
+  const firstLineNormal = "Build the site.".split(" ");
+  const firstLineItalic = "Skip".split(" ");
+  const secondLine = "the chaos.".split(" ");
 
   return (
     <section 
@@ -70,6 +71,20 @@ export default function Hero() {
         WebkitMaskImage: 'radial-gradient(circle at top right, black 25%, transparent 75%)' 
       }} />
 
+      {/* Premium Golden Glow behind the mockup and bottom-left area matching Reference Image 2 */}
+      <div className="hero-gold-glow" style={{
+        position: 'absolute',
+        left: '25%',
+        bottom: '-12%',
+        width: '580px',
+        height: '580px',
+        borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(168, 121, 62, 0.42) 0%, rgba(168, 121, 62, 0.09) 55%, transparent 80%)',
+        filter: 'blur(90px)',
+        pointerEvents: 'none',
+        zIndex: 1
+      }} />
+
       <div className="wrap hero-grid" style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
@@ -90,38 +105,45 @@ export default function Hero() {
             Website delivery, simplified
           </motion.p>
           
-          {/* Header matching Image 1 exactly */}
+          {/* Header matching Reference Image 2 exactly */}
           <motion.h1 
             variants={headingContainerVariants}
             initial="hidden"
             animate="visible"
             className="serif" 
             style={{
-              fontSize: 'clamp(2.3rem, 4.8vw, 4.2rem)',
+              fontSize: 'clamp(2.5rem, 5.2vw, 4.5rem)',
               fontWeight: 500,
-              lineHeight: 1.1,
-              letterSpacing: '-.02em',
+              lineHeight: 1.05,
+              letterSpacing: '-.025em',
               marginBottom: '24px',
               color: 'var(--ink)'
             }}
           >
-            {firstLine.map((word, i) => (
+            {firstLineNormal.map((word, i) => (
               <span key={i} style={{ display: 'inline-block', marginRight: '0.22em' }}>
                 <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
                   {word}
                 </motion.span>
               </span>
             ))}
-            <br />
-            <span style={{ display: 'inline-block', color: 'var(--brass)', fontStyle: 'italic', fontWeight: 400 }}>
-              {secondLine.map((word, i) => (
-                <span key={i} style={{ display: 'inline-block', marginRight: '0.22em' }}>
+            <span style={{ display: 'inline-block', color: 'var(--brass)', fontStyle: 'italic', fontWeight: 400, marginRight: '0.22em' }}>
+              {firstLineItalic.map((word, i) => (
+                <span key={i} style={{ display: 'inline-block' }}>
                   <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
                     {word}
                   </motion.span>
                 </span>
               ))}
             </span>
+            <br />
+            {secondLine.map((word, i) => (
+              <span key={i} style={{ display: 'inline-block', marginRight: '0.22em' }}>
+                <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
+                  {word}
+                </motion.span>
+              </span>
+            ))}
           </motion.h1>
 
           <motion.p 
