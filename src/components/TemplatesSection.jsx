@@ -7,6 +7,7 @@ export default function TemplatesSection() {
   const templates = [
     {
       colors: ['#1F3D30', '#A8793E', '#F4F2ED'], // Restaurants
+      img: '/restaurants.png',
       title: "Restaurants & Cafes",
     },
     {
@@ -15,6 +16,7 @@ export default function TemplatesSection() {
     },
     {
       colors: ['#1A3327', '#B58D53', '#FAF7F2'], // Salons
+      img: '/salons.png',
       title: "Salons",
     },
     {
@@ -69,19 +71,26 @@ export default function TemplatesSection() {
                     cursor: 'pointer'
                   }}
                 >
-                  {/* Swatch bars layout matching Image 3 */}
+                  {/* Swatch bars or Image */}
                   <div style={{
                     height: '110px',
-                    display: 'grid',
-                    gridTemplateColumns: '1.2fr 1fr 1fr',
+                    display: tmpl.img ? 'block' : 'grid',
+                    gridTemplateColumns: tmpl.img ? 'none' : '1.2fr 1fr 1fr',
                     borderRadius: '8px',
                     overflow: 'hidden',
                     border: '1.8px solid var(--border-light)',
-                    marginBottom: '14px'
+                    marginBottom: '14px',
+                    position: 'relative'
                   }}>
-                    <div style={{ background: tmpl.colors[0], height: '100%' }} />
-                    <div style={{ background: tmpl.colors[1], height: '100%' }} />
-                    <div style={{ background: tmpl.colors[2], height: '100%' }} />
+                    {tmpl.img ? (
+                      <img src={tmpl.img} alt={tmpl.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                    ) : (
+                      <>
+                        <div style={{ background: tmpl.colors[0], height: '100%' }} />
+                        <div style={{ background: tmpl.colors[1], height: '100%' }} />
+                        <div style={{ background: tmpl.colors[2], height: '100%' }} />
+                      </>
+                    )}
                   </div>
                   
                   {/* Title */}
