@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SiteBox — Build, preview, and deliver client websites faster</title>
+<meta name="description" content="SiteBox is the workspace freelancers and agencies use to choose a template, customize it, get client approval, and deploy — without juggling five different tools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F4F2ED;
+    --surface: #FFFFFF;
+    --border: #E3DFD3;
+    --ink: #1C1E1A;
+    --ink-soft: #6B6A63;
+    --ink-faint: #9A988F;
+    --green: #1F3D30;
+    --green-deep: #15291F;
+    --green-tint: #E8EEE9;
+    --brass: #A8793E;
+    --brass-soft: #F1E6D3;
+    --cream: #F7F4EC;
+    --radius: 10px;
+    --max: 1180px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+  .serif{font-family:'Fraunces',serif;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--brass);
+    font-weight:500;
+    margin-bottom:14px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:'';width:18px;height:1px;background:var(--brass);}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:'Inter',sans-serif;font-weight:600;font-size:.95rem;
+    padding:.85rem 1.5rem;border-radius:var(--radius);
+    border:1px solid transparent;cursor:pointer;
+    transition:transform .15s ease, background .2s ease, border-color .2s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--green);color:var(--cream);}
+  .btn-primary:hover{background:var(--green-deep);transform:translateY(-1px);}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--border);}
+  .btn-ghost:hover{border-color:var(--ink);transform:translateY(-1px);}
+  .btn-inverse{background:var(--brass);color:var(--green-deep);}
+  .btn-inverse:hover{background:#bd8a4c;transform:translateY(-1px);}
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(244,242,237,.92);
+    backdrop-filter:saturate(140%) blur(6px);
+    border-bottom:1px solid var(--border);
+  }
+  nav{
+    max-width:var(--max);margin:0 auto;padding:18px 32px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:1.15rem;}
+  .logo-mark{
+    width:30px;height:30px;border-radius:8px;background:var(--green);
+    color:var(--brass-soft);display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-weight:700;font-size:1rem;flex-shrink:0;
+  }
+  .nav-links{display:flex;align-items:center;gap:34px;}
+  .nav-links a{font-size:.92rem;font-weight:500;color:var(--ink-soft);transition:color .15s ease;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-cta{display:flex;align-items:center;gap:14px;}
+  .nav-links-mobile-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;}
+  .nav-links-mobile-toggle span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:96px 0 60px;}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;}
+  .hero h1{
+    font-size:clamp(2.4rem,4.6vw,3.9rem);
+    font-weight:600;line-height:1.07;letter-spacing:-.01em;
+    margin-bottom:22px;
+  }
+  .hero h1 em{font-style:italic;color:var(--green);font-weight:500;}
+  .hero p.lead{
+    font-size:1.12rem;color:var(--ink-soft);max-width:480px;margin-bottom:34px;
+  }
+  .hero-actions{display:flex;align-items:center;gap:18px;margin-bottom:30px;flex-wrap:wrap;}
+  .hero-note{font-size:.85rem;color:var(--ink-faint);}
+
+  /* hero mock card */
+  .mock-wrap{position:relative;}
+  .browser-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:14px;
+    overflow:hidden;box-shadow:0 1px 2px rgba(28,30,26,.04);
+  }
+  .browser-bar{
+    display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--border);
+  }
+  .browser-dot{width:9px;height:9px;border-radius:50%;background:var(--border);}
+  .browser-url{
+    margin-left:8px;font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--ink-soft);
+    background:var(--bg);padding:5px 12px;border-radius:6px;flex:1;
+  }
+  .browser-body{padding:22px;background:linear-gradient(165deg,#FBF8F2,#F2EEE3);}
+  .demo-hero{
+    background:linear-gradient(135deg,var(--green),#2d5440);
+    border-radius:10px;padding:28px 22px;color:var(--cream);margin-bottom:14px;
+  }
+  .demo-hero .tag{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass-soft);opacity:.85;}
+  .demo-hero h4{font-family:'Fraunces',serif;font-size:1.3rem;margin:8px 0 10px;}
+  .demo-hero .fakebar{height:8px;border-radius:4px;background:rgba(247,244,236,.25);margin-bottom:6px;width:78%;}
+  .demo-hero .fakebar.short{width:48%;}
+  .demo-pill{
+    display:inline-block;margin-top:12px;background:var(--brass);color:var(--green-deep);
+    font-size:.72rem;font-weight:600;padding:6px 14px;border-radius:6px;
+  }
+  .demo-rows{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+  .demo-block{background:var(--surface);border:1px solid var(--border);border-radius:8px;height:54px;}
+
+  .notify-chip{
+    position:absolute;right:-18px;top:34px;background:var(--surface);
+    border:1px solid var(--border);border-radius:10px;padding:11px 16px;
+    display:flex;align-items:center;gap:10px;box-shadow:0 8px 20px rgba(28,30,26,.08);
+    font-size:.82rem;max-width:230px;
+  }
+  .ping{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;position:relative;}
+  .ping::after{
+    content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--green);
+    animation:ping 2.2s ease-out infinite;
+  }
+  @keyframes ping{0%{transform:scale(.6);opacity:.9;}100%{transform:scale(2.1);opacity:0;}}
+
+  .link-chip{
+    position:absolute;left:-16px;bottom:-18px;background:var(--green-deep);color:var(--cream);
+    border-radius:10px;padding:10px 16px;font-family:'IBM Plex Mono',monospace;font-size:.74rem;
+    display:flex;align-items:center;gap:8px;box-shadow:0 8px 20px rgba(28,30,26,.18);
+  }
+
+  /* ---------- Audience strip ---------- */
+  .audience{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:26px 0;}
+  .audience .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 28px;}
+  .audience span.label{font-size:.82rem;color:var(--ink-faint);}
+  .audience .pill{
+    font-size:.85rem;font-weight:500;color:var(--ink-soft);
+    padding:6px 0;border-bottom:2px solid transparent;
+  }
+
+  /* ---------- Section shared ---------- */
+  section.block{padding:96px 0;}
+  .section-head{max-width:620px;margin-bottom:56px;}
+  .section-head h2{font-size:clamp(1.9rem,3vw,2.5rem);font-weight:600;letter-spacing:-.01em;}
+  .section-head p{color:var(--ink-soft);margin-top:14px;font-size:1.05rem;}
+
+  /* ---------- Why / pain-fix ---------- */
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .why-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:30px 26px;}
+  .why-card .from{font-size:.82rem;color:var(--ink-faint);text-decoration:line-through;margin-bottom:10px;}
+  .why-card h3{font-family:'Fraunces',serif;font-size:1.18rem;font-weight:600;margin-bottom:10px;}
+  .why-card p{color:var(--ink-soft);font-size:.95rem;}
+
+  /* ---------- Workflow (inverted, signature section) ---------- */
+  .workflow{background:var(--green-deep);color:var(--cream);}
+  .workflow .eyebrow{color:var(--brass);}
+  .workflow .eyebrow::before{background:var(--brass);}
+  .workflow .section-head h2{color:var(--cream);}
+  .workflow .section-head p{color:#C9D3CB;}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(247,244,236,.14);}
+  .step{padding:34px 26px;border-right:1px solid rgba(247,244,236,.14);}
+  .step:last-child{border-right:none;}
+  .step .num{font-family:'Fraunces',serif;font-size:2.1rem;color:var(--brass);margin-bottom:14px;}
+  .step h4{font-size:1.05rem;font-weight:600;margin-bottom:10px;}
+  .step p{font-size:.9rem;color:#C9D3CB;}
+
+  /* ---------- Features ---------- */
+  .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+  .feat{background:var(--surface);padding:30px 24px;}
+  .feat .icon{
+    width:38px;height:38px;border-radius:8px;background:var(--green-tint);
+    display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+  }
+  .feat .icon svg{width:18px;height:18px;stroke:var(--green);}
+  .feat h4{font-size:1rem;font-weight:600;margin-bottom:8px;}
+  .feat p{font-size:.88rem;color:var(--ink-soft);}
+
+  /* ---------- Templates ---------- */
+  .tmpl-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+  .tmpl-card{
+    border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--surface);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .tmpl-card:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(28,30,26,.08);}
+  .tmpl-swatch{height:96px;}
+  .tmpl-card .body{padding:16px 18px 20px;}
+  .tmpl-card h5{font-size:.95rem;font-weight:600;margin-bottom:4px;}
+  .tmpl-card p{font-size:.8rem;color:var(--ink-faint);}
+  .s1{background:linear-gradient(135deg,#cdd9cf,#9fb6a4);}
+  .s2{background:linear-gradient(135deg,#e7d3b8,#cf9f6d);}
+  .s3{background:linear-gradient(135deg,#d8d2c2,#b8ad8f);}
+  .s4{background:linear-gradient(135deg,#c3ccc4,#7f9685);}
+  .s5{background:linear-gradient(135deg,#e0d6c3,#b89469);}
+  .tmpl-more{text-align:center;margin-top:30px;}
+
+  /* ---------- Final CTA ---------- */
+  .cta-final{background:var(--brass-soft);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .cta-final .wrap{padding:90px 32px;text-align:center;}
+  .cta-final h2{font-size:clamp(2rem,3.6vw,3rem);font-weight:600;max-width:680px;margin:0 auto 18px;}
+  .cta-final p{color:var(--ink-soft);max-width:480px;margin:0 auto 34px;}
+  .cta-final .hero-actions{justify-content:center;}
+
+  /* ---------- Footer ---------- */
+  footer{padding:64px 0 36px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px;}
+  .foot-brand p{color:var(--ink-soft);font-size:.92rem;margin-top:14px;max-width:280px;}
+  .foot-col h6{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:16px;}
+  .foot-col a{display:block;font-size:.92rem;color:var(--ink-soft);margin-bottom:11px;}
+  .foot-col a:hover{color:var(--ink);}
+  .foot-bottom{
+    border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;
+    flex-wrap:wrap;gap:14px;font-size:.82rem;color:var(--ink-faint);
+  }
+  .foot-bottom .integrations{font-family:'IBM Plex Mono',monospace;}
+
+  /* ---------- Reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    .ping::after{animation:none;}
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:980px){
+    .hero-grid{grid-template-columns:1fr;gap:54px;}
+    .why-grid{grid-template-columns:1fr;}
+    .feat-grid{grid-template-columns:repeat(2,1fr);}
+    .steps{grid-template-columns:repeat(2,1fr);}
+    .step{border-bottom:1px solid rgba(247,244,236,.14);}
+    .tmpl-grid{grid-template-columns:repeat(2,1fr);}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:680px){
+    .nav-links{display:none;}
+    .nav-links-mobile-toggle{display:block;}
+    .nav-cta .btn-ghost{display:none;}
+    section.block{padding:72px 0;}
+    .feat-grid{grid-template-columns:1fr;}
+    .tmpl-grid{grid-template-columns:1fr 1fr;}
+    .notify-chip{display:none;}
+    .link-chip{position:static;display:inline-flex;margin-top:14px;}
+    .foot-grid{grid-template-columns:1fr;gap:32px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#" class="logo">
+      <span class="logo-mark">S</span>
+      Site<span style="color:var(--green)">Box</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#why">Why SiteBox</a></li>
+      <li><a href="#workflow">How it works</a></li>
+      <li><a href="#templates">Templates</a></li>
+      <li><a href="#features">Features</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#" class="btn btn-ghost">Log in</a>
+      <a href="#" class="btn btn-primary">Get Started Free</a>
+    </div>
+    <button class="nav-links-mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Website delivery, simplified</p>
+        <h1 class="serif">Build the site. <em>Skip the chaos.</em></h1>
+        <p class="lead">SiteBox is the one workspace freelancers and agencies use to choose a template, customize it, get the client's sign-off, and deploy — without five tabs and a hosting headache.</p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn-primary">Start Building Free</a>
+          <a href="#" class="btn btn-ghost">See a live demo →</a>
+        </div>
+        <p class="hero-note">Free plan available. Upgrade only when you need to.</p>
+      </div>
+
+      <div class="mock-wrap">
+        <div class="browser-card">
+          <div class="browser-bar">
+            <span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span>
+            <span class="browser-url mono">sitebox.studio/preview/glow-salon</span>
+          </div>
+          <div class="browser-body">
+            <div class="demo-hero">
+              <p class="tag mono">Glow Beauty Salon</p>
+              <h4>Beauty that defines you.</h4>
+              <div class="fakebar"></div>
+              <div class="fakebar short"></div>
+              <span class="demo-pill">Book Now</span>
+            </div>
+            <div class="demo-rows">
+              <div class="demo-block"></div>
+              <div class="demo-block"></div>
+              <div class="demo-block"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="notify-chip">
+          <span class="ping"></span>
+          <span>Client opened your preview · 3m ago</span>
+        </div>
+        <div class="link-chip">🔗 Shareable preview link</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUDIENCE STRIP -->
+  <section class="audience">
+    <div class="wrap">
+      <span class="label">Built for —</span>
+      <span class="pill">Freelancers</span>
+      <span class="pill">Agencies</span>
+      <span class="pill">Creators</span>
+      <span class="pill">Students</span>
+      <span class="pill">Developers</span>
+      <span class="pill">Small businesses</span>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="block" id="why">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Why people switch</p>
+        <h2 class="serif">Built for client work, not hobby projects.</h2>
+        <p>General-purpose builders weren't designed for the way agencies actually deliver sites.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <p class="from">Sending screenshots back and forth for feedback</p>
+          <h3 class="serif">One link, real preview</h3>
+          <p>Share a live preview link. The client sees the real site, on any device, before anything goes live.</p>
+        </div>
+        <div class="why-card reveal">
+          <p class="from">Re-explaining project status over email</p>
+          <h3 class="serif">A dashboard for every client</h3>
+          <p>Track every project, every client, and where each site stands — in one workspace instead of scattered folders.</p>
+        </div>
+        <div class="why-card reveal">
+          <p class="from">Wrestling with hosting just to go live</p>
+          <h3 class="serif">Deploy in one click</h3>
+          <p>Publish without touching servers, DNS, or config files. SiteBox handles the infrastructure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKFLOW -->
+  <section class="workflow" id="workflow">
+    <div class="wrap" style="padding:96px 0 0;">
+      <div class="section-head reveal">
+        <p class="eyebrow">How it works</p>
+        <h2 class="serif">Four steps from idea to invoice.</h2>
+        <p>The same flow whether it's your first client site or your fiftieth.</p>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <p class="num">01</p>
+        <h4>Choose a template</h4>
+        <p>Pick from templates built for real niches — restaurants, clinics, salons, gyms, agencies, and more.</p>
+      </div>
+      <div class="step reveal">
+        <p class="num">02</p>
+        <h4>Customize & preview</h4>
+        <p>Edit content, images, and styling, then preview exactly what your client will see.</p>
+      </div>
+      <div class="step reveal">
+        <p class="num">03</p>
+        <h4>Share & get approved</h4>
+        <p>Send a live preview link and know the moment your client opens it.</p>
+      </div>
+      <div class="step reveal">
+        <p class="num">04</p>
+        <h4>Deploy & manage</h4>
+        <p>Publish with one click, then track clients, projects, and analytics from a single dashboard.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="block" id="features">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">What's inside</p>
+        <h2 class="serif">Everything delivery needs. Nothing it doesn't.</h2>
+      </div>
+      <div class="feat-grid">
+        <div class="feat reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+          <h4>Template Library</h4>
+          <p>Professionally designed templates across niches, with more added regularly.</p>
+        </div>
+        <div class="feat reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg></div>
+          <h4>Project Management</h4>
+          <p>Manage every website you've built from a single organized dashboard.</p>
+        </div>
+        <div class="feat reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg></div>
+          <h4>Client Management</h4>
+          <p>Store client details and track every project tied to them in one place.</p>
+        </div>
+        <div class="feat reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/></svg></div>
+          <h4>One-Click Deployment</h4>
+          <p>Go live instantly. No servers, no DNS configuration, no waiting.</p>
+        </div>
+        <div class="feat reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <h4>Live Preview</h4>
+          <p>See exactly what visitors and clients will see, before you publish anything.</p>
+        </div>
+        <div class="feat reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></svg></div>
+          <h4>Shareable Demo Links</h4>
+          <p>Send one link for client review — no setup, no downloads, no friction.</p>
+        </div>
+        <div class="feat reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 19V9"/><path d="M11 19V5"/><path d="M18 19v-7"/></svg></div>
+          <h4>Analytics</h4>
+          <p>Track views and activity for every site, powered by Google Analytics and Microsoft Clarity.</p>
+        </div>
+        <div class="feat reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <h4>Built to Stay Up</h4>
+          <p>Platform health monitored continuously with Sentry, so issues get caught early.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMPLATES -->
+  <section class="block" id="templates" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Template library</p>
+        <h2 class="serif">Templates built for real businesses.</h2>
+        <p>Start from a niche that matches your client, then make it theirs.</p>
+      </div>
+      <div class="tmpl-grid">
+        <div class="tmpl-card reveal">
+          <div class="tmpl-swatch s4"></div>
+          <div class="body"><h5>Restaurants</h5><p>Menus, bookings, ambience</p></div>
+        </div>
+        <div class="tmpl-card reveal">
+          <div class="tmpl-swatch s1"></div>
+          <div class="body"><h5>Clinics</h5><p>Trust-first, appointment-ready</p></div>
+        </div>
+        <div class="tmpl-card reveal">
+          <div class="tmpl-swatch s2"></div>
+          <div class="body"><h5>Salons</h5><p>Visual, service-led layouts</p></div>
+        </div>
+        <div class="tmpl-card reveal">
+          <div class="tmpl-swatch s5"></div>
+          <div class="body"><h5>Gyms</h5><p>Bold, energy-first design</p></div>
+        </div>
+        <div class="tmpl-card reveal">
+          <div class="tmpl-swatch s3"></div>
+          <div class="body"><h5>Agencies</h5><p>Portfolio-forward, clean</p></div>
+        </div>
+      </div>
+      <p class="tmpl-more reveal"><a href="#" class="btn btn-ghost">Browse all templates →</a></p>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-final">
+    <div class="wrap reveal">
+      <h2 class="serif">Stop juggling tools. Start shipping sites.</h2>
+      <p>Choose a template, customize it, and send your first client preview today.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-primary">Start Building Free</a>
+        <a href="#" class="btn btn-ghost">Talk to us →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="logo">
+          <span class="logo-mark">S</span>
+          Site<span style="color:var(--green)">Box</span>
+        </a>
+        <p>The workspace for building, previewing, and delivering client websites — without the infrastructure headache.</p>
+      </div>
+      <div class="foot-col">
+        <h6>Product</h6>
+        <a href="#templates">Templates</a>
+        <a href="#features">Features</a>
+        <a href="#workflow">How it works</a>
+      </div>
+      <div class="foot-col">
+        <h6>Company</h6>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">Help & Support</a>
+      </div>
+      <div class="foot-col">
+        <h6>Get started</h6>
+        <a href="#">Create free account</a>
+        <a href="#">Log in</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 SiteBox. All rights reserved.</span>
+      <span class="integrations">Monitored with Google Analytics · Microsoft Clarity · Sentry</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.querySelector('.nav-links-mobile-toggle');
+  const links = document.querySelector('.nav-links');
+  toggle.addEventListener('click', () => {
+    const open = links.style.display === 'flex';
+    links.style.display = open ? 'none' : 'flex';
+    links.style.cssText += open ? '' : 'position:absolute;top:74px;left:0;right:0;background:var(--bg);flex-direction:column;align-items:flex-start;padding:20px 32px;gap:18px;border-bottom:1px solid var(--border);';
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
