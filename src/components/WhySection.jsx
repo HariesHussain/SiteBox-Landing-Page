@@ -64,7 +64,6 @@ export default function WhySection() {
                   color: 'var(--ink-light)'
                 }}
               >
-                {/* Animated strikethrough container */}
                 <div style={{ 
                   fontSize: '0.88rem', 
                   color: 'var(--ink-soft-light)', 
@@ -73,29 +72,7 @@ export default function WhySection() {
                   display: 'inline-block',
                   alignSelf: 'flex-start'
                 }}>
-                  <span style={{ opacity: 0.85 }}>{card.from}</span>
-                  <svg style={{
-                    position: 'absolute',
-                    left: 0,
-                    top: '50%',
-                    width: '100%',
-                    height: '2px',
-                    pointerEvents: 'none',
-                    overflow: 'visible'
-                  }}>
-                    <motion.line
-                      x1="0"
-                      y1="1"
-                      x2="100%"
-                      y2="1"
-                      stroke="var(--ink-soft-light)"
-                      strokeWidth="1.5"
-                      initial={{ pathLength: 0 }}
-                      whileInView={{ pathLength: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.6 + idx * 0.15, duration: 0.7, ease: 'easeInOut' }}
-                    />
-                  </svg>
+                  <span style={{ opacity: 0.85, textDecoration: 'line-through', textDecorationColor: 'var(--ink-soft-light)' }}>{card.from}</span>
                 </div>
                 
                 <h3 className="serif" style={{
