@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 export default function Hero() {
   const containerRef = useRef(null);
   const { scrollY } = useScroll();
-  
+
   // Parallax shift on mockup
   const yParallax = useTransform(scrollY, [0, 500], [0, 60]);
 
@@ -35,9 +35,9 @@ export default function Hero() {
   const line2Rest = "the chaos.".split(" ");
 
   return (
-    <section 
+    <section
       ref={containerRef}
-      className="hero" 
+      className="hero"
       style={{
         height: '100vh',
         minHeight: '100vh',
@@ -57,23 +57,23 @@ export default function Hero() {
       <div className="grid-bg-overlay" />
 
       {/* Background checks / grid texture */}
-      <div className="check-grid" style={{ 
-        left: 0, 
-        bottom: 0, 
-        width: '450px', 
-        height: '450px', 
-        opacity: 0.8, 
-        maskImage: 'radial-gradient(circle at bottom left, black 25%, transparent 75%)', 
-        WebkitMaskImage: 'radial-gradient(circle at bottom left, black 25%, transparent 75%)' 
+      <div className="check-grid" style={{
+        left: 0,
+        bottom: 0,
+        width: '450px',
+        height: '450px',
+        opacity: 0.8,
+        maskImage: 'radial-gradient(circle at bottom left, black 25%, transparent 75%)',
+        WebkitMaskImage: 'radial-gradient(circle at bottom left, black 25%, transparent 75%)'
       }} />
-      <div className="check-grid" style={{ 
-        right: 0, 
-        top: 0, 
-        width: '450px', 
-        height: '450px', 
-        opacity: 0.8, 
-        maskImage: 'radial-gradient(circle at top right, black 25%, transparent 75%)', 
-        WebkitMaskImage: 'radial-gradient(circle at top right, black 25%, transparent 75%)' 
+      <div className="check-grid" style={{
+        right: 0,
+        top: 0,
+        width: '450px',
+        height: '450px',
+        opacity: 0.8,
+        maskImage: 'radial-gradient(circle at top right, black 25%, transparent 75%)',
+        WebkitMaskImage: 'radial-gradient(circle at top right, black 25%, transparent 75%)'
       }} />
 
       {/* Thick golden-orange glow above the mockup area — matching user hex #ffba38 */}
@@ -99,16 +99,16 @@ export default function Hero() {
         zIndex: 2,
         width: '100%'
       }}>
-        
+
         {/* Left: Content */}
         <div className="hero-text-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%', maxWidth: '500px', alignSelf: 'start', marginTop: '0px' }}>
-          
+
           {/* Header matching Reference Image 2 exactly */}
-          <motion.h1 
+          <motion.h1
             variants={headingContainerVariants}
             initial="hidden"
             animate="visible"
-            className="serif" 
+            className="serif"
             style={{
               fontSize: 'clamp(2.8rem, 5.8vw, 4.8rem)',
               fontWeight: 500,
@@ -127,22 +127,24 @@ export default function Hero() {
               </span>
             ))}
             <br />
-            {/* Line 2: Skip (golden italic) the chaos. */}
-            <span style={{ display: 'inline-block', color: '#ffba38', fontStyle: 'italic', fontWeight: 400, marginRight: '0.22em' }}>
-              <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
-                Skip
-              </motion.span>
-            </span>
-            {line2Rest.map((word, i) => (
-              <span key={`l2-${i}`} style={{ display: 'inline-block', marginRight: '0.22em' }}>
+            {/* Line 2: Skip the chaos. — forced to single line */}
+            <span style={{ whiteSpace: 'nowrap' }}>
+              <span style={{ display: 'inline-block', color: '#D4AF37', fontStyle: 'italic', fontWeight: 400, marginRight: '0.22em' }}>
                 <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
-                  {word}
+                  Skip
                 </motion.span>
               </span>
-            ))}
+              {line2Rest.map((word, i) => (
+                <span key={`l2-${i}`} style={{ display: 'inline-block', marginRight: '0.22em' }}>
+                  <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
+                    {word}
+                  </motion.span>
+                </span>
+              ))}
+            </span>
           </motion.h1>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -159,7 +161,7 @@ export default function Hero() {
         </div>
 
         {/* Right: Mockup — rendered as a single pixel-perfect transparent image from reference */}
-        <div className="mock-wrap" style={{ position: 'relative', width: '100%', justifySelf: 'end', marginTop: '130px' }}>
+        <div className="mock-wrap" style={{ position: 'relative', width: '100%', justifySelf: 'end', marginTop: '150px' }}>
           {/* Thick golden glow behind the mockup area using user hex #ffba38 */}
           <div className="mockup-bg-glow" style={{
             position: 'absolute',
@@ -201,21 +203,22 @@ export default function Hero() {
             zIndex: 1
           }} />
 
-          <motion.div 
+          <motion.div
             className="mockup-img-container"
             style={{ y: yParallax, position: 'relative', zIndex: 2, width: '100%' }}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
           >
-            <img 
-              src="/mockup_clean.png" 
-              alt="SiteBox Browser Preview Mockup" 
+            <img
+              src="/mockup_clean.png"
+              alt="SiteBox Browser Preview Mockup"
               style={{
                 width: '100%',
                 height: 'auto',
                 display: 'block',
-                pointerEvents: 'none'
+                pointerEvents: 'none',
+                borderRadius: '12px'
               }}
             />
           </motion.div>
@@ -238,7 +241,7 @@ export default function Hero() {
             align-items: start !important;
           }
           .mock-wrap {
-            margin-top: 130px !important;
+            margin-top: 150px !important;
           }
           .hero-text-col {
             align-self: start !important;
@@ -246,7 +249,7 @@ export default function Hero() {
           }
           .mockup-img-container {
             max-width: 840px !important;
-            margin-left: -90px !important;
+            margin-left: -52px !important;
             margin-right: 0 !important;
           }
         }
