@@ -205,7 +205,7 @@ export default function Hero() {
 
           <motion.div
             className="mockup-img-container"
-            style={{ y: yParallax, position: 'relative', zIndex: 2, width: '100%' }}
+            style={{ position: 'relative', zIndex: 2, width: '100%' }}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
