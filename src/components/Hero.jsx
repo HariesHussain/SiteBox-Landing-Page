@@ -31,9 +31,8 @@ export default function Hero() {
     }
   };
 
-  const line1Normal = "Build the site.".split(" ");
-  const line1Italic = "Skip".split(" ");
-  const line2Normal = "Skip the chaos.".split(" ");
+  const line1Words = "Build the site.".split(" ");
+  const line2Rest = "the chaos.".split(" ");
 
   return (
     <section 
@@ -71,31 +70,31 @@ export default function Hero() {
         WebkitMaskImage: 'radial-gradient(circle at top right, black 25%, transparent 75%)' 
       }} />
 
-      {/* Premium Golden Glow behind the mockup and bottom-left area matching Reference Image 2 */}
+      {/* Subtle golden glow above the mockup area — matching reference */}
       <div className="hero-gold-glow" style={{
         position: 'absolute',
-        left: '20%',
-        bottom: '-5%',
-        width: '620px',
-        height: '620px',
+        right: '8%',
+        top: '12%',
+        width: '480px',
+        height: '480px',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(168, 121, 62, 0.45) 0%, rgba(168, 121, 62, 0.1) 60%, transparent 80%)',
-        filter: 'blur(90px)',
+        background: 'radial-gradient(circle, rgba(168, 121, 62, 0.22) 0%, rgba(168, 121, 62, 0.06) 55%, transparent 80%)',
+        filter: 'blur(80px)',
         pointerEvents: 'none',
         zIndex: 1
       }} />
 
       <div className="wrap hero-grid" style={{
         display: 'grid',
-        gridTemplateColumns: '0.9fr 1.1fr',
-        gap: '48px',
-        alignItems: 'center',
+        gridTemplateColumns: '1fr 1.15fr',
+        gap: '40px',
+        alignItems: 'start',
         position: 'relative',
         zIndex: 2
       }}>
         
         {/* Left: Content */}
-        <div className="hero-text-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%', maxWidth: '480px', alignSelf: 'flex-start', marginTop: '0px' }}>
+        <div className="hero-text-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%', maxWidth: '500px', alignSelf: 'flex-start', marginTop: '0px' }}>
           
           {/* Header matching Reference Image 2 exactly */}
           <motion.h1 
@@ -112,25 +111,23 @@ export default function Hero() {
               color: 'var(--ink)'
             }}
           >
-            {line1Normal.map((word, i) => (
-              <span key={i} style={{ display: 'inline-block', marginRight: '0.22em' }}>
+            {/* Line 1: Build the site. */}
+            {line1Words.map((word, i) => (
+              <span key={`l1-${i}`} style={{ display: 'inline-block', marginRight: '0.22em' }}>
                 <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
                   {word}
                 </motion.span>
               </span>
             ))}
-            <span style={{ display: 'inline-block', color: 'var(--brass)', fontStyle: 'italic', fontWeight: 400, marginRight: '0.22em' }}>
-              {line1Italic.map((word, i) => (
-                <span key={i} style={{ display: 'inline-block' }}>
-                  <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
-                    {word}
-                  </motion.span>
-                </span>
-              ))}
-            </span>
             <br />
-            {line2Normal.map((word, i) => (
-              <span key={i} style={{ display: 'inline-block', marginRight: '0.22em' }}>
+            {/* Line 2: Skip (golden italic) the chaos. */}
+            <span style={{ display: 'inline-block', color: 'var(--brass)', fontStyle: 'italic', fontWeight: 400, marginRight: '0.22em' }}>
+              <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
+                Skip
+              </motion.span>
+            </span>
+            {line2Rest.map((word, i) => (
+              <span key={`l2-${i}`} style={{ display: 'inline-block', marginRight: '0.22em' }}>
                 <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
                   {word}
                 </motion.span>
@@ -154,8 +151,8 @@ export default function Hero() {
           </motion.p>
         </div>
 
-        {/* Right: Mockup */}
-        <div className="mock-wrap" style={{ position: 'relative', width: '100%', justifySelf: 'end' }}>
+        {/* Right: Mockup — positioned to start at paragraph level and extend below */}
+        <div className="mock-wrap" style={{ position: 'relative', width: '100%', justifySelf: 'end', marginTop: '60px' }}>
           <motion.div 
             style={{ y: yParallax }}
             initial={{ opacity: 0, y: 40 }}
@@ -372,10 +369,10 @@ export default function Hero() {
             padding: 130px 0 120px !important;
           }
           .hero-grid {
-            align-items: center !important;
+            align-items: start !important;
           }
           .mock-wrap {
-            transform: translateY(40px) !important;
+            margin-top: 60px !important;
           }
           .hero-text-col {
             align-self: flex-start !important;
