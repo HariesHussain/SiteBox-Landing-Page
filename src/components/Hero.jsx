@@ -151,17 +151,17 @@ export default function Hero() {
           </motion.p>
         </div>
 
-        {/* Right: Mockup — positioned to start at paragraph level and extend below */}
+        {/* Right: Mockup — rendered as a single pixel-perfect transparent image from reference */}
         <div className="mock-wrap" style={{ position: 'relative', width: '100%', justifySelf: 'end', marginTop: '35px' }}>
           {/* Subtle golden glow behind the mockup area */}
           <div className="mockup-bg-glow" style={{
             position: 'absolute',
-            left: '10%',
+            left: '20%',
             top: '10%',
             width: '80%',
             height: '80%',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(212, 175, 55, 0.35) 0%, rgba(212, 175, 55, 0.12) 60%, transparent 80%)',
+            background: 'radial-gradient(circle, rgba(212, 175, 55, 0.42) 0%, rgba(212, 175, 55, 0.15) 60%, transparent 80%)',
             filter: 'blur(80px)',
             pointerEvents: 'none',
             zIndex: 1
@@ -170,11 +170,11 @@ export default function Hero() {
           {/* Golden glow at the top edge of the mockup */}
           <div className="mockup-top-glow" style={{
             position: 'absolute',
-            top: '-80px',
-            left: '15%',
-            width: '70%',
+            top: '-70px',
+            left: '25%',
+            width: '60%',
             height: '180px',
-            background: 'radial-gradient(ellipse at center, rgba(212, 175, 55, 0.38) 0%, rgba(212, 175, 55, 0.15) 50%, transparent 75%)',
+            background: 'radial-gradient(ellipse at center, rgba(212, 175, 55, 0.45) 0%, rgba(212, 175, 55, 0.18) 50%, transparent 75%)',
             filter: 'blur(50px)',
             pointerEvents: 'none',
             zIndex: 1
@@ -183,224 +183,34 @@ export default function Hero() {
           {/* Rich golden glow behind the bottom-left of the mockup */}
           <div className="mockup-bottom-left-glow" style={{
             position: 'absolute',
-            left: '-80px',
+            left: '0px',
             bottom: '20px',
             width: '320px',
             height: '320px',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(212, 175, 55, 0.45) 0%, rgba(212, 175, 55, 0.18) 50%, transparent 75%)',
+            background: 'radial-gradient(circle, rgba(212, 175, 55, 0.52) 0%, rgba(212, 175, 55, 0.22) 50%, transparent 75%)',
             filter: 'blur(50px)',
             pointerEvents: 'none',
             zIndex: 1
           }} />
 
           <motion.div 
-            style={{ y: yParallax, position: 'relative', zIndex: 2, maxWidth: '510px', marginLeft: 'auto', marginRight: '0' }}
+            className="mockup-img-container"
+            style={{ y: yParallax, position: 'relative', zIndex: 2, width: '100%' }}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
           >
-            <div className="browser-card" style={{
-              background: '#FFFFFF',
-              border: '1.8px solid var(--border)',
-              borderRadius: '14px',
-              overflow: 'hidden',
-              boxShadow: '0 25px 60px rgba(0,0,0,0.4)',
-              width: '100%',
-              position: 'relative'
-            }}>
-              {/* Browser top bar */}
-              <div className="browser-bar" style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '12px 16px',
-                borderBottom: '1.8px solid rgba(0, 0, 0, 0.08)'
-              }}>
-                <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: 'rgba(0,0,0,0.1)' }} />
-                <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: 'rgba(0,0,0,0.1)' }} />
-                <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: 'rgba(0,0,0,0.1)' }} />
-                <span className="browser-url mono" style={{
-                  marginLeft: '8px',
-                  fontSize: '0.74rem',
-                  color: 'rgba(0,0,0,0.5)',
-                  background: 'rgba(0,0,0,0.03)',
-                  padding: '5px 12px',
-                  borderRadius: '6px',
-                  flex: 1,
-                  textAlign: 'center'
-                }}>
-                  www.glowstudio.com
-                </span>
-              </div>
-              
-              {/* Browser screen area matching Image 1 */}
-              <div className="browser-body" style={{
-                background: '#FAF8F5',
-                color: '#1C1E1A',
-                fontFamily: "'Inter', sans-serif"
-              }}>
-                {/* Micro Navbar */}
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '12px 18px',
-                  borderBottom: '1px solid rgba(0,0,0,0.05)',
-                  fontSize: '0.75rem',
-                  fontWeight: 500
-                }}>
-                  <span style={{ fontWeight: 700, fontFamily: 'var(--serif)' }}>Studio Aura</span>
-                  <div style={{ display: 'flex', gap: '14px', color: 'rgba(0,0,0,0.6)' }}>
-                    <span>Features</span>
-                    <span>Pricing</span>
-                    <span>Contacts</span>
-                  </div>
-                  <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                    <span style={{ color: 'rgba(0,0,0,0.6)' }}>Log in</span>
-                    <span style={{
-                      background: '#1F3D30',
-                      color: '#FFFFFF',
-                      padding: '4px 10px',
-                      borderRadius: '4px',
-                      fontSize: '0.7rem',
-                      fontWeight: 600
-                    }}>Book Now</span>
-                  </div>
-                </div>
-
-                {/* Hero area within preview */}
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1.15fr)',
-                  padding: '24px 18px',
-                  gap: '16px',
-                  alignItems: 'center'
-                }}>
-                  <div style={{
-                    borderRadius: '8px',
-                    overflow: 'hidden',
-                    height: '180px',
-                    border: '1px solid rgba(0,0,0,0.05)'
-                  }}>
-                    <img 
-                      src="/salons.png" 
-                      alt="Salon Portrait" 
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <h4 className="serif" style={{
-                      fontSize: '1.4rem',
-                      fontWeight: 600,
-                      lineHeight: '1.15',
-                      color: '#1C1E1A'
-                    }}>
-                      Studio Aura | Beauty Reimagined
-                    </h4>
-                    <p style={{ fontSize: '0.78rem', color: 'rgba(0,0,0,0.5)', lineHeight: '1.4' }}>
-                      Premier local spa and salon experiences designed to refresh your body, mind, and spirit.
-                    </p>
-                    <span style={{
-                      alignSelf: 'flex-start',
-                      background: '#1F3D30',
-                      color: '#FFFFFF',
-                      fontSize: '0.75rem',
-                      fontWeight: 600,
-                      padding: '5px 12px',
-                      borderRadius: '4px',
-                      marginTop: '4px'
-                    }}>Book Now</span>
-                  </div>
-                </div>
-
-                {/* Lower tabs row */}
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-around',
-                  padding: '12px 0',
-                  borderTop: '1px solid rgba(0,0,0,0.05)',
-                  fontSize: '0.75rem',
-                  fontWeight: 600,
-                  color: 'rgba(0,0,0,0.7)',
-                  background: 'rgba(0,0,0,0.01)'
-                }}>
-                  <span>About</span>
-                  <span>Styling</span>
-                  <span>Treatments</span>
-                  <span>Services</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Floating notification chip matching Image 1 */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8, x: 50 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.8 }}
-              className="notify-chip"
+            <img 
+              src="/mockup_clean.png" 
+              alt="SiteBox Browser Preview Mockup" 
               style={{
-                position: 'absolute',
-                left: '-24px',
-                bottom: '120px',
-                background: '#FFFFFF',
-                border: '1.5px solid rgba(0, 0, 0, 0.1)',
-                borderRadius: '8px',
-                padding: '10px 16px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                boxShadow: '0 8px 30px rgba(0,0,0,0.15)',
-                fontSize: '0.82rem',
-                color: '#1C1E1A',
-                fontWeight: 500,
-                zIndex: 3
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                pointerEvents: 'none'
               }}
-            >
-              {/* Avatar circle */}
-              <div style={{
-                width: '24px',
-                height: '24px',
-                borderRadius: '50%',
-                background: 'var(--brass-soft)',
-                color: 'var(--green-deep)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 700,
-                fontSize: '0.7rem'
-              }}>
-                👤
-              </div>
-              <span>Client opened your preview</span>
-            </motion.div>
-
-            {/* Floating link badge under the mockup */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.1 }}
-              className="link-chip"
-              style={{
-                position: 'absolute',
-                right: '24px',
-                bottom: '-22px',
-                background: 'var(--surface)',
-                color: 'var(--cream)',
-                border: '1.8px solid var(--border)',
-                borderRadius: '8px',
-                padding: '8px 16px',
-                fontFamily: "'IBM Plex Mono', monospace",
-                fontSize: '0.74rem',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                boxShadow: '0 8px 25px rgba(0,0,0,0.2)',
-                zIndex: 3
-              }}
-            >
-              🔗 Shareable preview link
-            </motion.div>
+            />
           </motion.div>
         </div>
       </div>
@@ -420,6 +230,11 @@ export default function Hero() {
             align-self: flex-start !important;
             margin-top: 0 !important;
           }
+          .mockup-img-container {
+            max-width: 650px !important;
+            margin-left: -120px !important;
+            margin-right: 0 !important;
+          }
         }
         @media (max-width: 980px) {
           .hero-grid {
@@ -435,21 +250,14 @@ export default function Hero() {
             width: 100%;
             margin: 40px auto 0 !important;
           }
+          .mockup-img-container {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            max-width: 100% !important;
+            margin: 0 auto !important;
+          }
         }
         @media (max-width: 640px) {
-          .notify-chip {
-            position: static !important;
-            margin: 16px auto 0 !important;
-            max-width: max-content !important;
-            z-index: 1 !important;
-          }
-          .link-chip {
-            position: static !important;
-            margin: 12px auto 0 !important;
-            max-width: max-content !important;
-            justify-content: center !important;
-            z-index: 1 !important;
-          }
           .browser-bar {
             padding: 8px 12px !important;
           }
