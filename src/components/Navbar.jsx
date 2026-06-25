@@ -15,7 +15,7 @@ export default function Navbar() {
         setScrolled(false);
       }
     };
-    handleScroll(); // Trigger initial scroll check on mount
+    handleScroll(); // Initialize on mount
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -69,7 +69,7 @@ export default function Navbar() {
       zIndex: 50,
       background: scrolled ? 'rgba(7, 19, 15, 0.85)' : 'transparent',
       backdropFilter: scrolled ? 'saturate(140%) blur(12px)' : 'none',
-      borderBottom: scrolled ? '1.8px solid var(--border)' : 'none',
+      borderBottom: scrolled ? '1.8px solid var(--border)' : '1.8px solid transparent',
       boxShadow: 'none',
       transition: 'background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease'
     }}>
@@ -113,7 +113,7 @@ export default function Navbar() {
           }}>SiteBox</span>
         </a>
 
-        {/* Desktop Nav Links (Cream color matching dark green header) */}
+        {/* Desktop Nav Links */}
         <ul className="nav-links" style={{
           display: 'flex',
           alignItems: 'center',

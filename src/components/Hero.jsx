@@ -31,9 +31,18 @@ export default function Hero() {
     }
   };
 
-  const line1Normal = "Build the site.".split(" ");
-  const line1Italic = "Skip".split(" ");
-  const line2Normal = "Skip the chaos.".split(" ");
+  const line1 = [
+    { text: "Build", italic: false },
+    { text: "the", italic: false },
+    { text: "site.", italic: false },
+    { text: "Skip", italic: true }
+  ];
+  
+  const line2 = [
+    { text: "Skip", italic: false },
+    { text: "the", italic: false },
+    { text: "chaos.", italic: false }
+  ];
 
   return (
     <section 
@@ -45,7 +54,7 @@ export default function Hero() {
         alignItems: 'stretch',
         position: 'relative',
         overflow: 'hidden',
-        background: 'linear-gradient(to bottom, #1a3a2a 0%, #1a3a2a 70%, rgba(138, 122, 74, 0.4) 100%), #1a3a2a',
+        background: 'linear-gradient(to bottom, #1a3a2a 0%, #1a3a2a 70%, rgba(138, 122, 74, 0.40) 100%), #1a3a2a',
         borderBottom: '1.8px solid var(--border)',
         width: '100%'
       }}
@@ -91,6 +100,7 @@ export default function Hero() {
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'space-between',
+        gap: '48px',
         position: 'relative',
         zIndex: 2,
         width: '100%'
@@ -104,10 +114,10 @@ export default function Hero() {
           alignSelf: 'flex-start', 
           paddingTop: '130px', 
           width: '100%', 
-          maxWidth: '480px' 
+          maxWidth: '520px' 
         }}>
           
-          {/* Header matching Reference Image 2 exactly */}
+          {/* Header forcing two lines */}
           <motion.h1 
             variants={headingContainerVariants}
             initial="hidden"
@@ -122,32 +132,38 @@ export default function Hero() {
               color: 'var(--ink)'
             }}
           >
-            {/* Line 1 - Forced inline using whiteSpace: 'nowrap' */}
+            {/* Line 1 */}
             <span style={{ display: 'block', whiteSpace: 'nowrap' }}>
-              {line1Normal.map((word, i) => (
-                <span key={i} style={{ display: 'inline-block', marginRight: '0.22em' }}>
+              {line1.map((word, i) => (
+                <span 
+                  key={i} 
+                  style={{ 
+                    display: 'inline-block', 
+                    marginRight: i === line1.length - 1 ? 0 : '0.22em',
+                    color: word.italic ? 'var(--brass)' : 'inherit',
+                    fontStyle: word.italic ? 'italic' : 'normal',
+                    fontWeight: word.italic ? 400 : 500
+                  }}
+                >
                   <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
-                    {word}
+                    {word.text}
                   </motion.span>
                 </span>
               ))}
-              <span style={{ display: 'inline-block', color: 'var(--brass)', fontStyle: 'italic', fontWeight: 400 }}>
-                {line1Italic.map((word, i) => (
-                  <span key={i} style={{ display: 'inline-block' }}>
-                    <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
-                      {word}
-                    </motion.span>
-                  </span>
-                ))}
-              </span>
             </span>
             <br />
-            {/* Line 2 - Forced inline using whiteSpace: 'nowrap' */}
+            {/* Line 2 */}
             <span style={{ display: 'block', whiteSpace: 'nowrap' }}>
-              {line2Normal.map((word, i) => (
-                <span key={i} style={{ display: 'inline-block', marginRight: '0.22em' }}>
+              {line2.map((word, i) => (
+                <span 
+                  key={i} 
+                  style={{ 
+                    display: 'inline-block', 
+                    marginRight: i === line2.length - 1 ? 0 : '0.22em'
+                  }}
+                >
                   <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
-                    {word}
+                    {word.text}
                   </motion.span>
                 </span>
               ))}
@@ -171,7 +187,7 @@ export default function Hero() {
         </div>
 
         {/* Right: Mockup */}
-        <div className="mock-wrap" style={{ position: 'relative', width: '100%', justifySelf: 'end' }}>
+        <div className="mock-wrap" style={{ position: 'relative', width: '100%', maxWidth: '600px', alignSelf: 'center' }}>
           <motion.div 
             style={{ y: yParallax }}
             initial={{ opacity: 0, y: 40 }}
@@ -394,15 +410,17 @@ export default function Hero() {
             flex-direction: row !important;
             align-items: flex-start !important;
             justify-content: space-between !important;
+            width: 100% !important;
           }
           .hero-text-col {
             align-self: flex-start !important;
             padding-top: 130px !important;
-            flex: 1 !important;
+            flex: 0.9 !important;
           }
           .mock-wrap {
             align-self: center !important;
             flex: 1.1 !important;
+            margin-top: 60px !important;
           }
         }
         @media (max-width: 980px) {
@@ -410,10 +428,11 @@ export default function Hero() {
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
-            gap: 54px !important;
+            gap: 40px !important;
             text-align: center;
-            padding-top: 110px !important;
+            padding-top: 120px !important;
             padding-bottom: 60px !important;
+            width: 100% !important;
           }
           .hero-text-col {
             align-items: center !important;
@@ -424,7 +443,6 @@ export default function Hero() {
           .mock-wrap {
             max-width: 520px;
             width: 100%;
-            margin: 40px auto 0 !important;
             align-self: center !important;
           }
         }
