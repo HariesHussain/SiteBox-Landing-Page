@@ -49,6 +49,7 @@ export default function WorkflowSection() {
         <ScrollReveal 
           direction="up" 
           delay={0.2}
+          className="visual-diagram"
           style={{
             maxWidth: '850px',
             margin: '0 auto 64px',
@@ -148,7 +149,7 @@ export default function WorkflowSection() {
           </svg>
 
           {/* Step 2: Share Preview */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '14px', flexShrink: 0 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '14px', flexShrink: 0 }} className="workflow-preview-step">
             <div style={{
               background: 'var(--cream)',
               color: 'var(--green-deep)',
@@ -304,6 +305,18 @@ export default function WorkflowSection() {
             border-bottom: none !important;
           }
         }
+        @media (max-width: 768px) {
+          .visual-diagram {
+            flex-direction: column !important;
+            padding: 30px 20px !important;
+            gap: 20px !important;
+          }
+          .workflow-arrow {
+            width: 24px !important;
+            height: 24px !important;
+            transform: rotate(90deg) !important;
+          }
+        }
         @media (max-width: 680px) {
           .steps {
             grid-template-columns: 1fr !important;
@@ -315,9 +328,6 @@ export default function WorkflowSection() {
           }
           .step:last-child {
             border-bottom: none !important;
-          }
-          .workflow-arrow {
-            display: none !important;
           }
         }
       `}</style>

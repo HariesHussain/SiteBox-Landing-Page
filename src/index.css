@@ -1,6 +1,6 @@
 :root {
-  --bg: #07130F;               /* Dark premium base background */
-  --bg-light: #F6F4EF;         /* Light cream background for templates section */
+  --bg: #07130F;               /* Dark forest green background */
+  --bg-light: #F6F4EF;         /* Light cream background for sections */
   --surface: #0E221B;          /* Dark card surface */
   --surface-light: #FAF8F4;    /* Light card surface */
   --border: #1E3B30;           /* Dark border */
@@ -30,6 +30,8 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -40,11 +42,14 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 img, svg {
   display: block;
   max-width: 100%;
+  height: auto;
 }
 
 a {
@@ -56,13 +61,23 @@ ul {
   list-style: none;
 }
 
-/* Typography Utility Classes */
+/* Typography Consistency */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+p, span, a, button, li, label {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
 .serif {
   font-family: 'Fraunces', Georgia, serif;
 }
 
 .mono {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'IBM Plex Mono', 'Courier New', Courier, monospace;
 }
 
 .eyebrow {
@@ -113,11 +128,13 @@ ul {
 .btn-primary {
   background: var(--cream);
   color: var(--green-deep);
+  border: 1.5px solid var(--cream);
 }
 
 .btn-primary:hover {
   background: var(--brass);
   color: var(--green-deep);
+  border-color: var(--brass);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(212, 175, 55, 0.25);
 }
@@ -134,13 +151,15 @@ ul {
   transform: translateY(-2px);
 }
 
-/* Specific button styling in light section */
+/* Light Theme overrides */
 .light-theme .btn-primary {
   background: var(--green-deep);
   color: var(--cream);
+  border: 1.5px solid var(--green-deep);
 }
 .light-theme .btn-primary:hover {
   background: var(--green);
+  border-color: var(--green);
   box-shadow: 0 8px 24px rgba(43, 92, 67, 0.2);
 }
 .light-theme .btn-ghost {
@@ -180,7 +199,7 @@ ul {
   color: var(--ink-soft-light);
 }
 
-/* Clean Large Grid Pattern (Inspired by Vercel/Stripe) */
+/* Vercel Grid Pattern */
 .grid-bg-overlay {
   position: absolute;
   inset: 0;
@@ -200,7 +219,7 @@ ul {
   mask-image: radial-gradient(ellipse at center, black 60%, transparent 95%);
 }
 
-/* Strong Border Cards with custom border styles */
+/* Strong Border Cards */
 .strong-card {
   background: var(--surface);
   border: 1.8px solid var(--border);
@@ -217,16 +236,16 @@ ul {
   transform: translateY(-4px);
 }
 
-/* Cards in light theme section */
+/* Light Theme Card Shadow overrides */
 .light-theme .strong-card {
   background: var(--surface-light);
   border: 1.8px solid var(--border-light);
-  box-shadow: 0 4px 0px var(--border-light); /* thick solid shadow */
+  box-shadow: 0 4px 0px var(--border-light);
 }
 
 .light-theme .strong-card:hover {
   border-color: var(--border-light);
-  box-shadow: 0 10px 0px var(--border-light); /* thicker solid shadow */
+  box-shadow: 0 10px 0px var(--border-light);
   transform: translateY(-6px);
 }
 

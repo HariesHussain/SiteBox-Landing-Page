@@ -31,14 +31,9 @@ export default function Hero() {
     }
   };
 
-  const fadeUpVariants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.4 }
-    }
-  };
+  const firstLine = "Build the site. ".split(" ");
+  const firstSkip = "Skip".split(" ");
+  const secondLine = "Skip the chaos.".split(" ");
 
   return (
     <section 
@@ -49,7 +44,8 @@ export default function Hero() {
         position: 'relative',
         overflow: 'hidden',
         background: 'radial-gradient(circle at 80% 30%, var(--green-glow) 0%, var(--bg) 70%)',
-        borderBottom: '1.8px solid var(--border)'
+        borderBottom: '1.8px solid var(--border)',
+        width: '100%'
       }}
     >
       {/* Vercel-style Large Grid Pattern */}
@@ -65,7 +61,7 @@ export default function Hero() {
       }}>
         
         {/* Left: Content */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%' }}>
           <motion.p 
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
@@ -75,37 +71,46 @@ export default function Hero() {
             Website delivery, simplified
           </motion.p>
           
+          {/* Header matching Image 1 exactly */}
           <motion.h1 
             variants={headingContainerVariants}
             initial="hidden"
             animate="visible"
             className="serif" 
             style={{
-              fontSize: 'clamp(2.5rem, 5vw, 4.2rem)',
+              fontSize: 'clamp(2.3rem, 4.8vw, 4.2rem)',
               fontWeight: 500,
-              lineHeight: 1.08,
+              lineHeight: 1.1,
               letterSpacing: '-.02em',
               marginBottom: '24px',
               color: 'var(--ink)'
             }}
           >
-            {"Build the site. ".split(" ").map((word, i) => (
+            {firstLine.map((word, i) => (
               <span key={i} style={{ display: 'inline-block', marginRight: '0.22em' }}>
                 <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
                   {word}
                 </motion.span>
               </span>
             ))}
+            <span style={{ display: 'inline-block', marginRight: '0.22em' }}>
+              <motion.span 
+                variants={wordVariants} 
+                style={{ display: 'inline-block', color: 'var(--brass)', fontStyle: 'italic', fontWeight: 400 }}
+              >
+                {firstSkip}
+              </motion.span>
+            </span>
             <br />
-            <em style={{ fontStyle: 'italic', color: 'var(--brass)', fontWeight: 400 }}>
-              {"Skip the chaos.".split(" ").map((word, i) => (
+            <span style={{ display: 'inline-block', color: 'var(--brass)', fontStyle: 'italic', fontWeight: 400 }}>
+              {secondLine.map((word, i) => (
                 <span key={i} style={{ display: 'inline-block', marginRight: '0.22em' }}>
                   <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
                     {word}
                   </motion.span>
                 </span>
               ))}
-            </em>
+            </span>
           </motion.h1>
 
           <motion.p 
@@ -116,51 +121,16 @@ export default function Hero() {
               fontSize: '1.15rem',
               color: 'var(--ink-soft)',
               maxWidth: '490px',
-              marginBottom: '36px',
-              lineHeight: '1.6'
+              lineHeight: '1.6',
+              margin: 0
             }}
           >
             The streamlined website builder for modern freelancers. Designed for focus, professional results, and smooth client collaboration.
           </motion.p>
-
-          <motion.div 
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-            style={{ display: 'flex', alignItems: 'center', gap: '18px', marginBottom: '28px', flexWrap: 'wrap' }}
-          >
-            <a href="#" className="btn btn-primary" style={{ position: 'relative', overflow: 'hidden' }}>
-              Start Building Free
-              <motion.div 
-                animate={{ x: ['-100%', '200%'] }}
-                transition={{ repeat: Infinity, duration: 2.5, ease: 'linear', repeatDelay: 1 }}
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '30%',
-                  height: '100%',
-                  background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent)',
-                  skewX: -20,
-                  pointerEvents: 'none'
-                }}
-              />
-            </a>
-            <a href="#" className="btn btn-ghost">See a live demo →</a>
-          </motion.div>
-
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            style={{ fontSize: '0.85rem', color: 'var(--ink-faint)', fontWeight: 500 }}
-          >
-            Free plan available. Upgrade only when you need to.
-          </motion.p>
         </div>
 
         {/* Right: Mockup */}
-        <div className="mock-wrap" style={{ position: 'relative' }}>
+        <div className="mock-wrap" style={{ position: 'relative', width: '100%' }}>
           <motion.div 
             style={{ y: yParallax }}
             initial={{ opacity: 0, y: 40 }}
@@ -172,7 +142,8 @@ export default function Hero() {
               border: '1.8px solid var(--border)',
               borderRadius: '14px',
               overflow: 'hidden',
-              boxShadow: '0 20px 50px rgba(0,0,0,0.35)'
+              boxShadow: '0 20px 50px rgba(0,0,0,0.35)',
+              width: '100%'
             }}>
               {/* Browser top bar */}
               <div className="browser-bar" style={{
@@ -323,7 +294,7 @@ export default function Hero() {
               zIndex: 3
             }}
           >
-            {/* Avatar block */}
+            {/* Avatar circle */}
             <div style={{
               width: '24px',
               height: '24px',
@@ -380,14 +351,32 @@ export default function Hero() {
           .hero-grid > div {
             align-items: center !important;
           }
-          .hero-actions {
-            justify-content: center;
-            width: 100%;
-          }
           .mock-wrap {
             max-width: 520px;
             width: 100%;
             margin: 40px auto 0 !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .notify-chip {
+            position: static !important;
+            margin: 16px auto 0 !important;
+            max-width: max-content !important;
+            z-index: 1 !important;
+          }
+          .link-chip {
+            position: static !important;
+            margin: 12px auto 0 !important;
+            max-width: max-content !important;
+            justify-content: center !important;
+            z-index: 1 !important;
+          }
+          .browser-bar {
+            padding: 8px 12px !important;
+          }
+          .browser-url {
+            font-size: 0.68rem !important;
+            padding: 4px 8px !important;
           }
         }
       `}</style>
