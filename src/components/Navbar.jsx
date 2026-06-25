@@ -15,7 +15,6 @@ export default function Navbar() {
         setScrolled(false);
       }
     };
-    handleScroll(); // Initialize on mount
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -70,7 +69,6 @@ export default function Navbar() {
       background: scrolled ? 'rgba(7, 19, 15, 0.85)' : 'transparent',
       backdropFilter: scrolled ? 'saturate(140%) blur(12px)' : 'none',
       borderBottom: scrolled ? '1.8px solid var(--border)' : '1.8px solid transparent',
-      boxShadow: 'none',
       transition: 'background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease'
     }}>
       <nav className="wrap" style={{
@@ -113,7 +111,7 @@ export default function Navbar() {
           }}>SiteBox</span>
         </a>
 
-        {/* Desktop Nav Links */}
+        {/* Desktop Nav Links (Cream color matching dark green header) */}
         <ul className="nav-links" style={{
           display: 'flex',
           alignItems: 'center',
@@ -165,8 +163,20 @@ export default function Navbar() {
           alignItems: 'center',
           gap: '14px',
         }}>
-          <a href="#" className="btn btn-ghost" style={{ padding: '0.65rem 1.3rem', fontSize: '0.9rem' }}>Log in</a>
-          <a href="#" className="btn btn-primary" style={{ padding: '0.65rem 1.3rem', fontSize: '0.9rem' }}>Get Started</a>
+          <a href="#" className="btn btn-ghost" style={{ 
+            padding: '0.65rem 1.35rem', 
+            fontSize: '0.9rem', 
+            borderColor: 'var(--cream)', 
+            color: 'var(--cream)',
+            background: 'transparent'
+          }}>Log in</a>
+          <a href="#" className="btn btn-primary" style={{ 
+            padding: '0.65rem 1.35rem', 
+            fontSize: '0.9rem',
+            background: 'var(--cream)',
+            color: 'var(--green-deep)',
+            border: '1.5px solid var(--cream)'
+          }}>Get Started</a>
         </div>
 
         {/* Mobile Toggle Button */}
@@ -247,8 +257,22 @@ export default function Navbar() {
                 </li>
               ))}
               <li style={{ display: 'flex', gap: '12px', marginTop: '10px' }}>
-                <a href="#" className="btn btn-ghost" style={{ flex: 1, padding: '0.8rem', textAlign: 'center' }}>Log in</a>
-                <a href="#" className="btn btn-primary" style={{ flex: 1, padding: '0.8rem', textAlign: 'center' }}>Get Started</a>
+                <a href="#" className="btn btn-ghost" style={{ 
+                  flex: 1, 
+                  padding: '0.8rem', 
+                  textAlign: 'center', 
+                  borderColor: 'var(--cream)', 
+                  color: 'var(--cream)',
+                  background: 'transparent' 
+                }}>Log in</a>
+                <a href="#" className="btn btn-primary" style={{ 
+                  flex: 1, 
+                  padding: '0.8rem', 
+                  textAlign: 'center',
+                  background: 'var(--cream)',
+                  color: 'var(--green-deep)',
+                  border: '1.5px solid var(--cream)'
+                }}>Get Started</a>
               </li>
             </ul>
           </motion.div>
