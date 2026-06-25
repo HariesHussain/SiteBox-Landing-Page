@@ -42,7 +42,7 @@ export default function AnimatedText({
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once, margin: "-100px" }}
+        viewport={{ once: false, margin: "-100px" }}
         style={{ display: 'inline-block' }}
       >
         {words.map((word, idx) => (

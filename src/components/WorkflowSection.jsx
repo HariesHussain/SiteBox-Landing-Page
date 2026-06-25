@@ -135,7 +135,7 @@ export default function WorkflowSection() {
               strokeWidth="1.5"
               initial={{ pathLength: 0 }}
               whileInView={{ pathLength: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ delay: 0.4, duration: 0.6 }}
             />
             <motion.polygon
@@ -143,7 +143,7 @@ export default function WorkflowSection() {
               fill="rgba(255, 255, 255, 0.25)"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ delay: 0.9 }}
             />
           </svg>
@@ -177,7 +177,7 @@ export default function WorkflowSection() {
               strokeWidth="1.5"
               initial={{ pathLength: 0 }}
               whileInView={{ pathLength: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ delay: 1.0, duration: 0.6 }}
             />
             <motion.polygon
@@ -185,7 +185,7 @@ export default function WorkflowSection() {
               fill="rgba(255, 255, 255, 0.25)"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ delay: 1.5 }}
             />
           </svg>
@@ -213,7 +213,7 @@ export default function WorkflowSection() {
                   strokeLinejoin="round"
                   initial={{ pathLength: 0 }}
                   whileInView={{ pathLength: 1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   transition={{ delay: 1.6, duration: 0.4 }}
                 />
               </svg>
@@ -246,7 +246,7 @@ export default function WorkflowSection() {
             <motion.p 
               initial={{ y: 20, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ type: 'spring', stiffness: 120, delay: idx * 0.1, duration: 0.6 }}
               className="num serif" 
               style={{
@@ -262,7 +262,7 @@ export default function WorkflowSection() {
             <motion.h4 
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ delay: idx * 0.1 + 0.2, duration: 0.5 }}
               style={{
                 fontSize: '1.05rem',
@@ -276,7 +276,7 @@ export default function WorkflowSection() {
             <motion.p 
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ delay: idx * 0.1 + 0.3, duration: 0.5 }}
               style={{
                 fontSize: '0.9rem',

@@ -36,7 +36,7 @@ export default function AudienceStrip() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: false, margin: "-50px" }}
           style={{
             display: 'flex',
             flexWrap: 'wrap',
