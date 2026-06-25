@@ -40,10 +40,10 @@ export default function Hero() {
       ref={containerRef}
       className="hero" 
       style={{
-        padding: '120px 0 96px',
+        padding: '160px 0 110px',
         position: 'relative',
         overflow: 'hidden',
-        background: 'radial-gradient(circle at 85% 20%, #153828 0%, #081611 100%)',
+        background: 'linear-gradient(180deg, #07130F 0%, #0c2018 55%, #c8a96e 100%)',
         borderBottom: '1.8px solid var(--border)',
         width: '100%'
       }}
@@ -74,12 +74,12 @@ export default function Hero() {
       {/* Premium Golden Glow behind the mockup and bottom-left area matching Reference Image 2 */}
       <div className="hero-gold-glow" style={{
         position: 'absolute',
-        left: '25%',
-        bottom: '-12%',
-        width: '580px',
-        height: '580px',
+        left: '20%',
+        bottom: '-5%',
+        width: '620px',
+        height: '620px',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(168, 121, 62, 0.42) 0%, rgba(168, 121, 62, 0.09) 55%, transparent 80%)',
+        background: 'radial-gradient(circle, rgba(168, 121, 62, 0.45) 0%, rgba(168, 121, 62, 0.1) 60%, transparent 80%)',
         filter: 'blur(90px)',
         pointerEvents: 'none',
         zIndex: 1
@@ -87,23 +87,15 @@ export default function Hero() {
 
       <div className="wrap hero-grid" style={{
         display: 'grid',
-        gridTemplateColumns: '1.15fr 0.85fr',
-        gap: '96px',
+        gridTemplateColumns: '0.9fr 1.1fr',
+        gap: '48px',
         alignItems: 'center',
         position: 'relative',
         zIndex: 2
       }}>
         
         {/* Left: Content */}
-        <div className="hero-text-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%', maxWidth: '580px' }}>
-          <motion.p 
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="eyebrow"
-          >
-            Website delivery, simplified
-          </motion.p>
+        <div className="hero-text-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%', maxWidth: '480px' }}>
           
           {/* Header matching Reference Image 2 exactly */}
           <motion.h1 
@@ -151,9 +143,9 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             style={{
-              fontSize: '1.15rem',
-              color: 'var(--ink-soft)',
-              maxWidth: '490px',
+              fontSize: '1.12rem',
+              color: 'rgba(255, 255, 255, 0.85)',
+              maxWidth: '430px',
               lineHeight: '1.6',
               margin: 0
             }}
@@ -163,7 +155,7 @@ export default function Hero() {
         </div>
 
         {/* Right: Mockup */}
-        <div className="mock-wrap" style={{ position: 'relative', width: '100%', maxWidth: '540px', justifySelf: 'end' }}>
+        <div className="mock-wrap" style={{ position: 'relative', width: '100%', justifySelf: 'end' }}>
           <motion.div 
             style={{ y: yParallax }}
             initial={{ opacity: 0, y: 40 }}
@@ -175,7 +167,7 @@ export default function Hero() {
               border: '1.8px solid var(--border)',
               borderRadius: '14px',
               overflow: 'hidden',
-              boxShadow: '0 20px 50px rgba(0,0,0,0.35)',
+              boxShadow: '0 25px 60px rgba(0,0,0,0.4)',
               width: '100%'
             }}>
               {/* Browser top bar */}
@@ -249,7 +241,7 @@ export default function Hero() {
                   <div style={{
                     borderRadius: '8px',
                     overflow: 'hidden',
-                    height: '140px',
+                    height: '180px',
                     border: '1px solid rgba(0,0,0,0.05)'
                   }}>
                     <img 
@@ -260,21 +252,21 @@ export default function Hero() {
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     <h4 className="serif" style={{
-                      fontSize: '1.25rem',
+                      fontSize: '1.4rem',
                       fontWeight: 600,
                       lineHeight: '1.15',
                       color: '#1C1E1A'
                     }}>
                       Studio Aura | Beauty Reimagined
                     </h4>
-                    <p style={{ fontSize: '0.68rem', color: 'rgba(0,0,0,0.5)', lineHeight: '1.4' }}>
+                    <p style={{ fontSize: '0.78rem', color: 'rgba(0,0,0,0.5)', lineHeight: '1.4' }}>
                       Premier local spa and salon experiences designed to refresh your body, mind, and spirit.
                     </p>
                     <span style={{
                       alignSelf: 'flex-start',
                       background: '#1F3D30',
                       color: '#FFFFFF',
-                      fontSize: '0.7rem',
+                      fontSize: '0.75rem',
                       fontWeight: 600,
                       padding: '5px 12px',
                       borderRadius: '4px',
@@ -312,7 +304,7 @@ export default function Hero() {
             style={{
               position: 'absolute',
               left: '-24px',
-              bottom: '50px',
+              bottom: '70px',
               background: '#FFFFFF',
               border: '1.5px solid rgba(0, 0, 0, 0.1)',
               borderRadius: '8px',
@@ -376,17 +368,11 @@ export default function Hero() {
 
       <style>{`
         @media (min-width: 981px) {
-          .hero {
-            padding: 120px 0 170px !important;
-          }
           .hero-grid {
-            align-items: start !important;
+            align-items: center !important;
           }
           .mock-wrap {
-            transform: translateY(110px) !important;
-          }
-          .hero-text-col {
-            margin-top: 20px;
+            transform: translateY(40px) !important;
           }
         }
         @media (max-width: 980px) {

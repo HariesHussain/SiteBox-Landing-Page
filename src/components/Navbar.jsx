@@ -61,8 +61,10 @@ export default function Navbar() {
 
   return (
     <header style={{
-      position: 'sticky',
+      position: 'fixed',
       top: 0,
+      left: 0,
+      width: '100%',
       zIndex: 50,
       background: scrolled ? 'rgba(7, 19, 15, 0.85)' : 'transparent',
       backdropFilter: scrolled ? 'saturate(140%) blur(12px)' : 'none',
@@ -116,10 +118,9 @@ export default function Navbar() {
           gap: '34px',
         }}>
           {[
-            { id: 'why', label: 'Why SiteBox' },
-            { id: 'workflow', label: 'How it works' },
-            { id: 'templates', label: 'Templates' },
-            { id: 'features', label: 'Features' }
+            { id: 'features', label: 'Features' },
+            { id: 'pricing', label: 'Pricing' },
+            { id: 'blog', label: 'Blog' }
           ].map((item) => (
             <li key={item.id}>
               <a
@@ -161,8 +162,13 @@ export default function Navbar() {
           alignItems: 'center',
           gap: '14px',
         }}>
-          <a href="#" className="btn btn-ghost" style={{ padding: '0.65rem 1.3rem', fontSize: '0.9rem' }}>Log in</a>
-          <a href="#" className="btn btn-primary" style={{ padding: '0.65rem 1.3rem', fontSize: '0.9rem' }}>Get Started</a>
+          <a href="#" className="btn btn-ghost" style={{ 
+            padding: '0.65rem 1.35rem', 
+            fontSize: '0.9rem', 
+            borderColor: 'var(--cream)', 
+            color: 'var(--cream)',
+            background: 'transparent'
+          }}>Get Started</a>
         </div>
 
         {/* Mobile Toggle Button */}
@@ -221,10 +227,9 @@ export default function Navbar() {
               gap: '18px'
             }}>
               {[
-                { id: 'why', label: 'Why SiteBox' },
-                { id: 'workflow', label: 'How it works' },
-                { id: 'templates', label: 'Templates' },
-                { id: 'features', label: 'Features' }
+                { id: 'features', label: 'Features' },
+                { id: 'pricing', label: 'Pricing' },
+                { id: 'blog', label: 'Blog' }
               ].map((item) => (
                 <li key={item.id}>
                   <a
@@ -242,9 +247,15 @@ export default function Navbar() {
                   </a>
                 </li>
               ))}
-              <li style={{ display: 'flex', gap: '12px', marginTop: '10px' }}>
-                <a href="#" className="btn btn-ghost" style={{ flex: 1, padding: '0.8rem' }}>Log in</a>
-                <a href="#" className="btn btn-primary" style={{ flex: 1, padding: '0.8rem' }}>Get Started</a>
+              <li style={{ display: 'flex', marginTop: '10px' }}>
+                <a href="#" className="btn btn-ghost" style={{ 
+                  flex: 1, 
+                  padding: '0.8rem', 
+                  textAlign: 'center', 
+                  borderColor: 'var(--cream)', 
+                  color: 'var(--cream)',
+                  background: 'transparent' 
+                }}>Get Started</a>
               </li>
             </ul>
           </motion.div>
@@ -258,11 +269,6 @@ export default function Navbar() {
           }
           .nav-links-mobile-toggle {
             display: flex !important;
-          }
-        }
-        @media (max-width: 680px) {
-          .nav-cta .btn-ghost {
-            display: none !important;
           }
         }
       `}</style>
