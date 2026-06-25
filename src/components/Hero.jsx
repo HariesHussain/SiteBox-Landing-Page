@@ -42,7 +42,7 @@ export default function Hero() {
         padding: '130px 0 110px',
         position: 'relative',
         overflow: 'hidden',
-        background: 'linear-gradient(180deg, #1a3a2a 0%, #1a3a2a 70%, rgba(138, 122, 74, 0.4) 100%)',
+        background: 'linear-gradient(180deg, #1a3a2a 0%, #1a3a2a 65%, rgba(148, 130, 80, 0.48) 100%)',
         borderBottom: '1.8px solid var(--border)',
         width: '100%'
       }}
@@ -73,21 +73,21 @@ export default function Hero() {
       {/* Subtle golden glow above the mockup area — matching reference */}
       <div className="hero-gold-glow" style={{
         position: 'absolute',
-        right: '8%',
-        top: '12%',
-        width: '480px',
-        height: '480px',
+        right: '5%',
+        top: '10%',
+        width: '580px',
+        height: '580px',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(168, 121, 62, 0.22) 0%, rgba(168, 121, 62, 0.06) 55%, transparent 80%)',
-        filter: 'blur(80px)',
+        background: 'radial-gradient(circle, rgba(180, 135, 75, 0.32) 0%, rgba(180, 135, 75, 0.1) 60%, transparent 80%)',
+        filter: 'blur(90px)',
         pointerEvents: 'none',
         zIndex: 1
       }} />
 
       <div className="wrap hero-grid" style={{
         display: 'grid',
-        gridTemplateColumns: '1fr 1.15fr',
-        gap: '40px',
+        gridTemplateColumns: '1.25fr 0.95fr',
+        gap: '60px',
         alignItems: 'start',
         position: 'relative',
         zIndex: 2
@@ -103,7 +103,7 @@ export default function Hero() {
             animate="visible"
             className="serif" 
             style={{
-              fontSize: 'clamp(2.5rem, 5.2vw, 4.5rem)',
+              fontSize: 'clamp(2.8rem, 5.8vw, 4.8rem)',
               fontWeight: 500,
               lineHeight: 1.05,
               letterSpacing: '-.025em',
@@ -140,9 +140,9 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             style={{
-              fontSize: '1.12rem',
+              fontSize: '1.16rem',
               color: 'rgba(255, 255, 255, 0.85)',
-              maxWidth: '430px',
+              maxWidth: '460px',
               lineHeight: '1.6',
               margin: 0
             }}
@@ -152,9 +152,21 @@ export default function Hero() {
         </div>
 
         {/* Right: Mockup — positioned to start at paragraph level and extend below */}
-        <div className="mock-wrap" style={{ position: 'relative', width: '100%', justifySelf: 'end', marginTop: '60px' }}>
+        <div className="mock-wrap" style={{ position: 'relative', width: '100%', justifySelf: 'end', marginTop: '35px' }}>
+          {/* Golden glow at the top edge of the mockup */}
+          <div className="mockup-top-glow" style={{
+            position: 'absolute',
+            top: '-70px',
+            left: '15%',
+            width: '70%',
+            height: '180px',
+            background: 'radial-gradient(ellipse at center, rgba(180, 135, 75, 0.28) 0%, rgba(180, 135, 75, 0.08) 60%, transparent 80%)',
+            filter: 'blur(45px)',
+            pointerEvents: 'none',
+            zIndex: 1
+          }} />
           <motion.div 
-            style={{ y: yParallax }}
+            style={{ y: yParallax, position: 'relative', zIndex: 2 }}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
@@ -372,7 +384,7 @@ export default function Hero() {
             align-items: start !important;
           }
           .mock-wrap {
-            margin-top: 60px !important;
+            margin-top: 35px !important;
           }
           .hero-text-col {
             align-self: flex-start !important;
