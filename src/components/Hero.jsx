@@ -39,12 +39,16 @@ export default function Hero() {
       ref={containerRef}
       className="hero" 
       style={{
-        padding: '130px 0 110px',
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
         position: 'relative',
         overflow: 'hidden',
-        background: 'linear-gradient(180deg, #1a3a2a 0%, #1a3a2a 65%, rgba(148, 130, 80, 0.48) 100%)',
+        background: 'linear-gradient(180deg, #1a3a2a 0%, #1a3a2a 65%, rgba(255, 186, 56, 0.18) 100%)',
         borderBottom: '1.8px solid var(--border)',
-        width: '100%'
+        width: '100%',
+        padding: '120px 0 80px'
       }}
     >
       {/* Vercel-style Large Grid Pattern */}
@@ -70,27 +74,28 @@ export default function Hero() {
         WebkitMaskImage: 'radial-gradient(circle at top right, black 25%, transparent 75%)' 
       }} />
 
-      {/* Subtle golden glow above the mockup area — matching reference */}
+      {/* Thick golden-orange glow above the mockup area — matching user hex #ffba38 */}
       <div className="hero-gold-glow" style={{
         position: 'absolute',
-        right: '5%',
-        top: '10%',
-        width: '580px',
-        height: '580px',
+        right: '2%',
+        top: '22%',
+        width: '650px',
+        height: '650px',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(212, 175, 55, 0.35) 0%, rgba(212, 175, 55, 0.12) 60%, transparent 80%)',
-        filter: 'blur(90px)',
+        background: 'radial-gradient(circle, rgba(255, 186, 56, 0.65) 0%, rgba(255, 186, 56, 0.25) 55%, transparent 75%)',
+        filter: 'blur(80px)',
         pointerEvents: 'none',
         zIndex: 1
       }} />
 
       <div className="wrap hero-grid" style={{
         display: 'grid',
-        gridTemplateColumns: 'minmax(0, 1.25fr) minmax(0, 0.95fr)',
-        gap: '60px',
+        gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1.45fr)',
+        gap: '64px',
         alignItems: 'start',
         position: 'relative',
-        zIndex: 2
+        zIndex: 2,
+        width: '100%'
       }}>
         
         {/* Left: Content */}
@@ -121,7 +126,7 @@ export default function Hero() {
             ))}
             <br />
             {/* Line 2: Skip (golden italic) the chaos. */}
-            <span style={{ display: 'inline-block', color: 'var(--brass)', fontStyle: 'italic', fontWeight: 400, marginRight: '0.22em' }}>
+            <span style={{ display: 'inline-block', color: '#ffba38', fontStyle: 'italic', fontWeight: 400, marginRight: '0.22em' }}>
               <motion.span variants={wordVariants} style={{ display: 'inline-block' }}>
                 Skip
               </motion.span>
@@ -152,44 +157,44 @@ export default function Hero() {
         </div>
 
         {/* Right: Mockup — rendered as a single pixel-perfect transparent image from reference */}
-        <div className="mock-wrap" style={{ position: 'relative', width: '100%', justifySelf: 'end', marginTop: '35px' }}>
-          {/* Subtle golden glow behind the mockup area */}
+        <div className="mock-wrap" style={{ position: 'relative', width: '100%', justifySelf: 'end', marginTop: '240px' }}>
+          {/* Thick golden glow behind the mockup area using user hex #ffba38 */}
           <div className="mockup-bg-glow" style={{
             position: 'absolute',
-            left: '20%',
-            top: '10%',
-            width: '80%',
-            height: '80%',
+            left: '10%',
+            top: '5%',
+            width: '90%',
+            height: '90%',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(212, 175, 55, 0.42) 0%, rgba(212, 175, 55, 0.15) 60%, transparent 80%)',
-            filter: 'blur(80px)',
+            background: 'radial-gradient(circle, rgba(255, 186, 56, 0.85) 0%, rgba(255, 186, 56, 0.35) 50%, transparent 75%)',
+            filter: 'blur(75px)',
             pointerEvents: 'none',
             zIndex: 1
           }} />
 
-          {/* Golden glow at the top edge of the mockup */}
+          {/* Golden glow at the top edge of the mockup using user hex #ffba38 */}
           <div className="mockup-top-glow" style={{
             position: 'absolute',
-            top: '-70px',
-            left: '25%',
-            width: '60%',
-            height: '180px',
-            background: 'radial-gradient(ellipse at center, rgba(212, 175, 55, 0.45) 0%, rgba(212, 175, 55, 0.18) 50%, transparent 75%)',
-            filter: 'blur(50px)',
+            top: '-80px',
+            left: '20%',
+            width: '70%',
+            height: '200px',
+            background: 'radial-gradient(ellipse at center, rgba(255, 186, 56, 0.8) 0%, rgba(255, 186, 56, 0.3) 50%, transparent 75%)',
+            filter: 'blur(45px)',
             pointerEvents: 'none',
             zIndex: 1
           }} />
 
-          {/* Rich golden glow behind the bottom-left of the mockup */}
+          {/* Rich golden glow behind the bottom-left of the mockup using user hex #ffba38 */}
           <div className="mockup-bottom-left-glow" style={{
             position: 'absolute',
-            left: '0px',
-            bottom: '20px',
-            width: '320px',
-            height: '320px',
+            left: '-20px',
+            bottom: '10px',
+            width: '350px',
+            height: '350px',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(212, 175, 55, 0.52) 0%, rgba(212, 175, 55, 0.22) 50%, transparent 75%)',
-            filter: 'blur(50px)',
+            background: 'radial-gradient(circle, rgba(255, 186, 56, 0.85) 0%, rgba(255, 186, 56, 0.35) 50%, transparent 75%)',
+            filter: 'blur(45px)',
             pointerEvents: 'none',
             zIndex: 1
           }} />
@@ -218,25 +223,32 @@ export default function Hero() {
       <style>{`
         @media (min-width: 981px) {
           .hero {
-            padding: 130px 0 120px !important;
+            min-height: 100vh !important;
+            padding: 110px 0 60px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
           }
           .hero-grid {
             align-items: start !important;
           }
           .mock-wrap {
-            margin-top: 35px !important;
+            margin-top: 240px !important;
           }
           .hero-text-col {
             align-self: flex-start !important;
             margin-top: 0 !important;
           }
           .mockup-img-container {
-            max-width: 650px !important;
-            margin-left: -120px !important;
+            max-width: 840px !important;
+            margin-left: 0px !important;
             margin-right: 0 !important;
           }
         }
         @media (max-width: 980px) {
+          .hero {
+            padding: 130px 0 80px !important;
+          }
           .hero-grid {
             grid-template-columns: 1fr !important;
             gap: 54px !important;
@@ -270,3 +282,4 @@ export default function Hero() {
     </section>
   );
 }
+
