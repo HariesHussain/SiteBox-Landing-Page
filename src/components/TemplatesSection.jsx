@@ -12,6 +12,7 @@ export default function TemplatesSection() {
     },
     {
       colors: ['#172E24', '#C3B091', '#E6DFD3'], // Clinics
+      img: '/clinics.png',
       title: "Clinics",
     },
     {
@@ -21,6 +22,7 @@ export default function TemplatesSection() {
     },
     {
       colors: ['#224434', '#9F753E', '#EFECE6'], // Gyms
+      img: '/gyms.png',
       title: "Gyms",
     }
   ];
@@ -73,17 +75,19 @@ export default function TemplatesSection() {
                 >
                   {/* Swatch bars or Image */}
                   <div style={{
-                    height: '110px',
+                    height: tmpl.img ? 'auto' : '110px',
+                    aspectRatio: tmpl.img ? '16/9' : 'auto',
                     display: tmpl.img ? 'block' : 'grid',
                     gridTemplateColumns: tmpl.img ? 'none' : '1.2fr 1fr 1fr',
                     borderRadius: '8px',
                     overflow: 'hidden',
                     border: '1.8px solid var(--border-light)',
                     marginBottom: '14px',
-                    position: 'relative'
+                    position: 'relative',
+                    background: tmpl.img ? 'var(--border-light)' : 'transparent'
                   }}>
                     {tmpl.img ? (
-                      <img src={tmpl.img} alt={tmpl.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                      <img src={tmpl.img} alt={tmpl.title} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
                     ) : (
                       <>
                         <div style={{ background: tmpl.colors[0], height: '100%' }} />
