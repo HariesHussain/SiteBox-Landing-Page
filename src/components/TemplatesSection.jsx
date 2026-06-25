@@ -7,7 +7,7 @@ export default function TemplatesSection() {
   const templates = [
     {
       colors: ['#1F3D30', '#A8793E', '#F4F2ED'], // Restaurants
-      title: "Restaurants",
+      title: "Restaurants & Cafes",
     },
     {
       colors: ['#172E24', '#C3B091', '#E6DFD3'], // Clinics
@@ -15,14 +15,11 @@ export default function TemplatesSection() {
     },
     {
       colors: ['#1A3327', '#B58D53', '#FAF7F2'], // Salons
+      title: "Salons",
     },
     {
       colors: ['#224434', '#9F753E', '#EFECE6'], // Gyms
       title: "Gyms",
-    },
-    {
-      colors: ['#1D372B', '#AD8349', '#F3EFE9'], // Agencies
-      title: "Agencies",
     }
   ];
 
@@ -49,7 +46,7 @@ export default function TemplatesSection() {
         <div className="tmpl-scroll-container">
           <div className="tmpl-grid" style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(5, 1fr)',
+            gridTemplateColumns: 'repeat(4, 1fr)',
             gap: '18px'
           }}>
             {templates.map((tmpl, idx) => (
