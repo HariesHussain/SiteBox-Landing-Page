@@ -184,7 +184,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.5 }}
             id="hero-waitlist"
             className="hero-waitlist-container"
-            style={{ marginTop: '31px', width: '100%', maxWidth: '440px' }}
+            style={{ marginTop: '70px', width: '100%', maxWidth: '440px' }}
           >
             {isSubmitted ? (
               <motion.div
