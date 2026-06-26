@@ -4,7 +4,6 @@ import Hero from './components/Hero';
 import AudienceStrip from './components/AudienceStrip';
 import WhySection from './components/WhySection';
 import WorkflowSection from './components/WorkflowSection';
-import FeaturesSection from './components/FeaturesSection';
 import TemplatesSection from './components/TemplatesSection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
@@ -18,7 +17,6 @@ function App() {
         <AudienceStrip />
         <WhySection />
         <WorkflowSection />
-        <FeaturesSection />
         <TemplatesSection />
         <CTASection />
       </main>
