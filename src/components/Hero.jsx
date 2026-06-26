@@ -490,6 +490,14 @@ export default function Hero() {
             margin: 0 auto !important;
           }
         }
+        @media (max-width: 980px) {
+          .hero-waitlist-container {
+            margin-top: 36px !important;
+          }
+          .mobile-only.value-strip {
+            margin-top: 16px !important;
+          }
+        }
         @media (max-width: 640px) {
           .browser-bar {
             padding: 8px 12px !important;
