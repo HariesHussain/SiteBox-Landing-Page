@@ -1,5 +1,117 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Zap, Palette, Users } from 'lucide-react';
+
+const ValueStrip = ({ isMobile, className = "" }) => {
+  const items = [
+    { icon: Zap, title: "Lightning Fast", subtitle: "Build in minutes" },
+    { icon: Palette, title: "Premium Templates", subtitle: "Designed to convert" },
+    { icon: Users, title: "Client Ready", subtitle: "Share with ease" }
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 12 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.5, staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 12 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
+  return (
+    <motion.div 
+      className={`value-strip ${className}`}
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr auto 1fr auto 1fr',
+        alignItems: 'center',
+        width: '100%',
+        marginTop: isMobile ? '28px' : '32px',
+        marginBottom: isMobile ? '28px' : '12px',
+        gap: isMobile ? '8px' : '12px',
+      }}
+    >
+      {items.map((item, index) => (
+        <React.Fragment key={index}>
+          <motion.div 
+            variants={itemVariants}
+            className="value-strip-item"
+            whileHover={{ y: isMobile ? 0 : -2 }}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: isMobile ? '10px' : '8px',
+              textAlign: 'center',
+              cursor: 'default'
+            }}
+          >
+            <motion.div 
+              className="vs-icon-container"
+              whileHover={{ scale: 1.08, backgroundColor: 'rgba(212,175,55,0.12)' }}
+              transition={{ duration: 0.25 }}
+              style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: '10px',
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#D4AF37'
+              }}
+            >
+              <item.icon size={16} />
+            </motion.div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+              <div style={{ 
+                fontSize: isMobile ? '12px' : '13px', 
+                fontWeight: 600, 
+                color: '#FFFFFF',
+                fontFamily: 'Inter, sans-serif'
+              }}>
+                {item.title}
+              </div>
+              <div style={{ 
+                fontSize: isMobile ? '10px' : '11px', 
+                fontWeight: 400, 
+                color: 'rgba(255,255,255,0.65)',
+                fontFamily: 'Inter, sans-serif',
+                lineHeight: 1.2
+              }}>
+                {item.subtitle}
+              </div>
+            </div>
+          </motion.div>
+          {index < items.length - 1 && (
+            <div style={{
+              width: '1px',
+              height: isMobile ? '32px' : '40px',
+              background: 'rgba(255,255,255,0.12)'
+            }} />
+          )}
+        </React.Fragment>
+      ))}
+    </motion.div>
+  );
+};
 
 export default function Hero() {
   const containerRef = useRef(null);
@@ -177,6 +289,8 @@ export default function Hero() {
             The streamlined website builder for modern freelancers. Designed for focus, professional results, and smooth client collaboration.
           </motion.p>
 
+          <ValueStrip isMobile={false} className="desktop-only" />
+
           {/* Waitlist Form */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -184,7 +298,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.5 }}
             id="hero-waitlist"
             className="hero-waitlist-container"
-            style={{ marginTop: '70px', width: '100%', maxWidth: '440px' }}
+            style={{ marginTop: '0px', width: '100%', maxWidth: '440px' }}
           >
             {isSubmitted ? (
               <motion.div
@@ -255,6 +369,8 @@ export default function Hero() {
               <p style={{ color: '#FF6B6B', fontSize: '0.85rem', marginTop: '8px', fontFamily: 'Inter, sans-serif' }}>{error}</p>
             )}
           </motion.div>
+
+          <ValueStrip isMobile={true} className="mobile-only" />
         </div>
 
         {/* Right: Mockup — rendered as a single pixel-perfect transparent image from reference */}

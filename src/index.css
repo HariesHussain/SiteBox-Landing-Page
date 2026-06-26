@@ -274,4 +274,28 @@ span {
   .wrap {
     padding: 0 16px;
   }
+  .hero-waitlist-form {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .hero-waitlist-form input,
+  .hero-waitlist-form button {
+    width: 100% !important;
+  }
+}
+
+/* Desktop / Mobile utility classes */
+.desktop-only {
+  display: grid !important;
+}
+.mobile-only {
+  display: none !important;
+}
+@media (max-width: 1024px) {
+  .desktop-only {
+    display: none !important;
+  }
+  .mobile-only {
+    display: grid !important;
+  }
 }
