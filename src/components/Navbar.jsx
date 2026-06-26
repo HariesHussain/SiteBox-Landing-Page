@@ -287,10 +287,48 @@ export default function Navbar() {
           .nav-links-mobile-toggle {
             display: flex !important;
           }
+          header nav.wrap {
+            padding: 12px 20px !important;
+          }
         }
         @media (max-width: 680px) {
           .nav-cta .btn-ghost {
             display: none !important;
+          }
+        }
+        @media (max-width: 480px) {
+          header nav.wrap {
+            padding: 10px 16px !important;
+          }
+          .logo span {
+            font-size: 1.15rem !important;
+          }
+          .logo svg {
+            width: 22px !important;
+            height: 22px !important;
+          }
+          .nav-cta .btn-primary {
+            padding: 0.5rem 1rem !important;
+            font-size: 0.8rem !important;
+          }
+        }
+        @media (max-width: 360px) {
+          header nav.wrap {
+            padding: 8px 12px !important;
+          }
+          .logo span {
+            font-size: 1.05rem !important;
+          }
+          .logo svg {
+            width: 18px !important;
+            height: 18px !important;
+          }
+          .nav-cta .btn-primary {
+            padding: 0.45rem 0.8rem !important;
+            font-size: 0.75rem !important;
+          }
+          .nav-links-mobile-toggle {
+            padding: 2px !important;
           }
         }
       `}</style>

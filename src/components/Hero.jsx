@@ -81,7 +81,7 @@ const ValueStrip = ({ isMobile, className = "" }) => {
               <item.icon size={16} />
             </motion.div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-              <div style={{ 
+              <div className="vs-title" style={{ 
                 fontSize: isMobile ? '12px' : '13px', 
                 fontWeight: 600, 
                 color: '#FFFFFF',
@@ -89,7 +89,7 @@ const ValueStrip = ({ isMobile, className = "" }) => {
               }}>
                 {item.title}
               </div>
-              <div style={{ 
+              <div className="vs-subtitle" style={{ 
                 fontSize: isMobile ? '10px' : '11px', 
                 fontWeight: 400, 
                 color: 'rgba(255,255,255,0.65)',
@@ -468,7 +468,10 @@ export default function Hero() {
         }
         @media (max-width: 980px) {
           .hero {
-            padding: 150px 0 80px !important;
+            height: auto !important;
+            min-height: 100vh !important;
+            max-height: none !important;
+            padding: 120px 0 60px !important;
           }
           .hero-grid {
             grid-template-columns: 1fr !important;
@@ -496,6 +499,52 @@ export default function Hero() {
           }
           .mobile-only.value-strip {
             margin-top: 16px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .hero {
+            padding: 100px 0 50px !important;
+          }
+          .mobile-only.value-strip {
+            gap: 6px !important;
+          }
+          .mobile-only.value-strip .vs-icon-container {
+            width: 28px !important;
+            height: 28px !important;
+            border-radius: 8px !important;
+          }
+          .mobile-only.value-strip .vs-icon-container svg {
+            width: 14px !important;
+            height: 14px !important;
+          }
+          .mobile-only.value-strip .vs-title {
+            font-size: 11px !important;
+          }
+          .mobile-only.value-strip .vs-subtitle {
+            font-size: 9px !important;
+          }
+        }
+        @media (max-width: 360px) {
+          .hero {
+            padding: 90px 0 40px !important;
+          }
+          .mobile-only.value-strip {
+            gap: 4px !important;
+          }
+          .mobile-only.value-strip .vs-icon-container {
+            width: 24px !important;
+            height: 24px !important;
+            border-radius: 6px !important;
+          }
+          .mobile-only.value-strip .vs-icon-container svg {
+            width: 12px !important;
+            height: 12px !important;
+          }
+          .mobile-only.value-strip .vs-title {
+            font-size: 10px !important;
+          }
+          .mobile-only.value-strip .vs-subtitle {
+            font-size: 8px !important;
           }
         }
         @media (max-width: 640px) {
