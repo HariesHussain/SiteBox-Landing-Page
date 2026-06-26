@@ -5,6 +5,24 @@ export default function Hero() {
   const containerRef = useRef(null);
   const { scrollY } = useScroll();
 
+  const [email, setEmail] = React.useState('');
+  const [isSubmitted, setIsSubmitted] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+    setError('');
+    setLoading(true);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setLoading(false);
+    setIsSubmitted(true);
+  };
+
   // Parallax shift on mockup
   const yParallax = useTransform(scrollY, [0, 500], [0, 60]);
 
@@ -158,6 +176,85 @@ export default function Hero() {
           >
             The streamlined website builder for modern freelancers. Designed for focus, professional results, and smooth client collaboration.
           </motion.p>
+
+          {/* Waitlist Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            id="hero-waitlist"
+            className="hero-waitlist-container"
+            style={{ marginTop: '31px', width: '100%', maxWidth: '440px' }}
+          >
+            {isSubmitted ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                style={{
+                  color: 'var(--brass)',
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  padding: '12px 18px',
+                  background: 'rgba(212, 175, 55, 0.08)',
+                  border: '1.5px solid rgba(212, 175, 55, 0.2)',
+                  borderRadius: 'var(--radius)',
+                  fontFamily: 'Inter, sans-serif'
+                }}
+              >
+                You're on the list! 🎉
+              </motion.div>
+            ) : (
+              <form onSubmit={handleSubmit} className="hero-waitlist-form" style={{ display: 'flex', gap: '10px', width: '100%', alignItems: 'center' }}>
+                <input
+                  type="email"
+                  placeholder="you@example.com"
+                  required
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (error) setError('');
+                  }}
+                  style={{
+                    flex: 1,
+                    minWidth: 0,
+                    padding: '0.85rem 1rem',
+                    borderRadius: 'var(--radius)',
+                    border: '1.5px solid rgba(255, 255, 255, 0.15)',
+                    background: 'rgba(255, 255, 255, 0.06)',
+                    color: 'var(--cream)',
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: '0.95rem',
+                    outline: 'none',
+                    transition: 'border-color 0.2s ease, background 0.2s ease'
+                  }}
+                  className="hero-waitlist-input"
+                />
+                <button
+                  type="submit"
+                  disabled={loading}
+                  style={{
+                    padding: '0.85rem 1.5rem',
+                    borderRadius: 'var(--radius)',
+                    border: '1.5px solid var(--brass)',
+                    background: 'var(--brass)',
+                    color: 'var(--green-deep)',
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: '600',
+                    fontSize: '0.95rem',
+                    cursor: 'pointer',
+                    transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+                    whiteSpace: 'nowrap'
+                  }}
+                  className="hero-waitlist-button"
+                >
+                  {loading ? 'Joining...' : 'Join the Waitlist'}
+                </button>
+              </form>
+            )}
+            {error && (
+              <p style={{ color: '#FF6B6B', fontSize: '0.85rem', marginTop: '8px', fontFamily: 'Inter, sans-serif' }}>{error}</p>
+            )}
+          </motion.div>
         </div>
 
         {/* Right: Mockup — rendered as a single pixel-perfect transparent image from reference */}
@@ -285,6 +382,24 @@ export default function Hero() {
             font-size: 0.68rem !important;
             padding: 4px 8px !important;
           }
+          .hero-waitlist-form {
+            flex-direction: column !important;
+          }
+          .hero-waitlist-input {
+            width: 100% !important;
+          }
+          .hero-waitlist-button {
+            width: 100% !important;
+          }
+        }
+        .hero-waitlist-input:focus {
+          border-color: var(--brass) !important;
+          background: rgba(255, 255, 255, 0.08) !important;
+        }
+        .hero-waitlist-button:hover {
+          background: transparent !important;
+          color: var(--brass) !important;
+          box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
         }
       `}</style>
     </section>
