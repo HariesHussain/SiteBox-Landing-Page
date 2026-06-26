@@ -468,11 +468,11 @@ export default function Hero() {
         }
         @media (max-width: 980px) {
           .hero {
-            padding: 130px 0 80px !important;
+            padding: 150px 0 80px !important;
           }
           .hero-grid {
             grid-template-columns: 1fr !important;
-            gap: 54px !important;
+            gap: 32px !important;
             text-align: center;
           }
           .hero-grid > div {
@@ -481,7 +481,7 @@ export default function Hero() {
           .mock-wrap {
             max-width: 520px;
             width: 100%;
-            margin: 40px auto 0 !important;
+            margin: 20px auto 0 !important;
           }
           .mockup-img-container {
             margin-left: 0 !important;
