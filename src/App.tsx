@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Zap, Palette, Users, ArrowRight } from 'lucide-react';
+import { PrivacyPolicy } from './legal/PrivacyPolicy';
+import { TermsOfService } from './legal/TermsOfService';
+import { CookiePolicy } from './legal/CookiePolicy';
+import { RefundPolicy } from './legal/RefundPolicy';
+import { CookieConsentBanner } from './components/CookieConsentBanner';
+import { ContactModal } from './components/ContactModal';
 
 const APP_URL = "https://app.sitebox.studio";
 
@@ -120,7 +126,12 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
 // ==========================================
 // Header Navigation Component
 // ==========================================
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  onNavigate: (path: string) => void;
+  currentPath: string;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPath }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
@@ -134,6 +145,7 @@ const Navbar: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (currentPath !== '/') return;
     const sectionIds = ['why', 'workflow', 'templates', 'features'];
     const observers: { obs: IntersectionObserver; el: HTMLElement }[] = [];
 
@@ -159,11 +171,22 @@ const Navbar: React.FC = () => {
     return () => {
       observers.forEach(({ obs, el }) => obs.unobserve(el));
     };
-  }, []);
+  }, [currentPath]);
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
+    if (currentPath !== '/') {
+      onNavigate('/');
+      setTimeout(() => {
+        if (id === 'root') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 80);
+      return;
+    }
     if (id === 'root') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
@@ -1852,24 +1875,25 @@ const FinalCTA: React.FC = () => {
 // ==========================================
 // Footer Component
 // ==========================================
-const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigate: (path: string) => void;
+  onOpenCookieSettings: () => void;
+  onOpenContact: (topic?: string) => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenCookieSettings, onOpenContact }) => {
   const currentYear = new Date().getFullYear();
 
-  const scrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    onNavigate('/');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const productLinks = [
     { label: 'Templates', href: '#templates' },
-    { label: 'Features', href: '#features' },
     { label: 'How it works', href: '#workflow' },
-  ];
-
-  const companyLinks = [
     { label: 'Why SiteBox', href: '#why' },
-    { label: 'Templates', href: '#templates' },
-    { label: 'Start Free', href: APP_URL },
   ];
 
   return (
@@ -1886,16 +1910,16 @@ const Footer: React.FC = () => {
           className="foot-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: '1.4fr 1fr 1fr 1fr',
-            gap: '40px',
+            gridTemplateColumns: '1.6fr 0.9fr 1.1fr 1.1fr 0.9fr',
+            gap: '36px',
             marginBottom: '60px',
           }}
         >
-          {/* Brand Info */}
+          {/* Brand Info & Business Details */}
           <div className="foot-brand">
             <a
-              href="#root"
-              onClick={scrollToTop}
+              href="/"
+              onClick={handleLogoClick}
               className="logo"
               style={{
                 display: 'flex',
@@ -1938,6 +1962,12 @@ const Footer: React.FC = () => {
             >
               The workspace for building, previewing, and delivering client websites — without the infrastructure headache.
             </p>
+            {/* Operator and Business Details */}
+            <div style={{ marginTop: '18px', fontSize: '0.82rem', color: 'var(--ink-faint)', lineHeight: 1.6 }}>
+              <span style={{ color: 'var(--cream)', fontWeight: 600 }}>SiteBox Studio</span><br />
+              Independent product by Haries Hussain<br />
+              Direct support: <a href="mailto:support@sitebox.studio" style={{ color: 'var(--brass)', textDecoration: 'underline' }}>support@sitebox.studio</a>
+            </div>
           </div>
 
           {/* Product Links */}
@@ -1960,6 +1990,13 @@ const Footer: React.FC = () => {
                 key={link.label}
                 whileHover={{ x: 2, color: 'var(--brass)' }}
                 href={link.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate('/');
+                  setTimeout(() => {
+                    document.getElementById(link.href.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' });
+                  }, 80);
+                }}
                 style={{
                   fontSize: '0.92rem',
                   color: 'var(--ink-soft)',
@@ -1972,7 +2009,7 @@ const Footer: React.FC = () => {
             ))}
           </div>
 
-          {/* Company Links */}
+          {/* Company & Inquiries */}
           <div className="foot-col" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <h3
               style={{
@@ -1985,26 +2022,166 @@ const Footer: React.FC = () => {
                 fontWeight: 600,
               }}
             >
-              Company
+              Inquiries
             </h3>
-            {companyLinks.map((link) => (
-              <motion.a
-                key={link.label}
-                whileHover={{ x: 2, color: 'var(--brass)' }}
-                href={link.href}
-                style={{
-                  fontSize: '0.92rem',
-                  color: 'var(--ink-soft)',
-                  alignSelf: 'flex-start',
-                  transition: 'color 0.2s ease',
-                }}
-              >
-                {link.label}
-              </motion.a>
-            ))}
+            <motion.button
+              type="button"
+              whileHover={{ x: 2, color: 'var(--brass)' }}
+              onClick={() => onOpenContact('Template Request')}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                textAlign: 'left',
+                cursor: 'pointer',
+                fontSize: '0.92rem',
+                color: 'var(--ink-soft)',
+                alignSelf: 'flex-start',
+                transition: 'color 0.2s ease',
+              }}
+            >
+              Request a Template
+            </motion.button>
+            <motion.button
+              type="button"
+              whileHover={{ x: 2, color: 'var(--brass)' }}
+              onClick={() => onOpenContact('Freelancer Partnership')}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                textAlign: 'left',
+                cursor: 'pointer',
+                fontSize: '0.92rem',
+                color: 'var(--ink-soft)',
+                alignSelf: 'flex-start',
+                transition: 'color 0.2s ease',
+              }}
+            >
+              Contact Support
+            </motion.button>
+            <motion.a
+              whileHover={{ x: 2, color: 'var(--brass)' }}
+              href={APP_URL}
+              style={{
+                fontSize: '0.92rem',
+                color: 'var(--ink-soft)',
+                alignSelf: 'flex-start',
+                transition: 'color 0.2s ease',
+              }}
+            >
+              Start Free
+            </motion.a>
           </div>
 
-          {/* Get Started Links (Directing to Canonical App) */}
+          {/* Legal & Compliance */}
+          <div className="foot-col" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <h3
+              style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '0.72rem',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                color: 'var(--ink-faint)',
+                marginBottom: '16px',
+                fontWeight: 600,
+              }}
+            >
+              Legal &amp; Privacy
+            </h3>
+            <motion.button
+              type="button"
+              whileHover={{ x: 2, color: 'var(--brass)' }}
+              onClick={() => onNavigate('/privacy')}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                textAlign: 'left',
+                cursor: 'pointer',
+                fontSize: '0.92rem',
+                color: 'var(--ink-soft)',
+                alignSelf: 'flex-start',
+                transition: 'color 0.2s ease',
+              }}
+            >
+              Privacy Policy
+            </motion.button>
+            <motion.button
+              type="button"
+              whileHover={{ x: 2, color: 'var(--brass)' }}
+              onClick={() => onNavigate('/terms')}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                textAlign: 'left',
+                cursor: 'pointer',
+                fontSize: '0.92rem',
+                color: 'var(--ink-soft)',
+                alignSelf: 'flex-start',
+                transition: 'color 0.2s ease',
+              }}
+            >
+              Terms of Service
+            </motion.button>
+            <motion.button
+              type="button"
+              whileHover={{ x: 2, color: 'var(--brass)' }}
+              onClick={() => onNavigate('/cookies')}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                textAlign: 'left',
+                cursor: 'pointer',
+                fontSize: '0.92rem',
+                color: 'var(--ink-soft)',
+                alignSelf: 'flex-start',
+                transition: 'color 0.2s ease',
+              }}
+            >
+              Cookie Policy
+            </motion.button>
+            <motion.button
+              type="button"
+              whileHover={{ x: 2, color: 'var(--brass)' }}
+              onClick={() => onNavigate('/refunds')}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                textAlign: 'left',
+                cursor: 'pointer',
+                fontSize: '0.92rem',
+                color: 'var(--ink-soft)',
+                alignSelf: 'flex-start',
+                transition: 'color 0.2s ease',
+              }}
+            >
+              Refund Policy
+            </motion.button>
+            <motion.button
+              type="button"
+              whileHover={{ x: 2, color: 'var(--brass)' }}
+              onClick={onOpenCookieSettings}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                textAlign: 'left',
+                cursor: 'pointer',
+                fontSize: '0.92rem',
+                color: 'var(--ink-soft)',
+                alignSelf: 'flex-start',
+                transition: 'color 0.2s ease',
+              }}
+            >
+              Cookie Preferences
+            </motion.button>
+          </div>
+
+          {/* Get Started Links */}
           <div className="foot-col" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <h3
               style={{
@@ -2055,14 +2232,14 @@ const Footer: React.FC = () => {
             display: 'flex',
             justifyContent: 'space-between',
             flexWrap: 'wrap',
-            gap: '14px',
+            gap: '16px',
             fontSize: '0.82rem',
             color: 'var(--ink-faint)',
           }}
         >
-          <span>© {currentYear} SiteBox. All rights reserved.</span>
-          <span className="integrations" style={{ fontFamily: "'IBM Plex Mono', monospace", color: 'var(--ink-faint)' }}>
-            Engineered for modern client delivery
+          <span>© {currentYear} SiteBox Studio. All rights reserved.</span>
+          <span style={{ maxWidth: '620px', lineHeight: 1.5, textAlign: 'right' }}>
+            Disclaimer: All template previews, client mockups, and trade marks are demonstrative portfolio materials. Brand marks belong to their respective owners.
           </span>
         </div>
       </div>
@@ -2083,6 +2260,9 @@ const Footer: React.FC = () => {
             flex-direction: column;
             align-items: flex-start;
           }
+          .foot-bottom span {
+            text-align: left !important;
+          }
         }
       `}</style>
     </footer>
@@ -2093,18 +2273,83 @@ const Footer: React.FC = () => {
 // Main Application Export
 // ==========================================
 export default function App() {
+  const [currentPath, setCurrentPath] = useState(
+    typeof window !== 'undefined' ? window.location.pathname : '/'
+  );
+  const [isCookieSettingsOpen, setIsCookieSettingsOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [contactTopic, setContactTopic] = useState('Template Request');
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const navigate = (path: string) => {
+    window.history.pushState({}, '', path);
+    setCurrentPath(path);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleOpenContact = (topic = 'Template Request') => {
+    setContactTopic(topic);
+    setIsContactModalOpen(true);
+  };
+
   return (
     <>
-      <Navbar />
-      <main>
-        <Hero />
-        <AudienceFeatures />
-        <WhySiteBox />
-        <HowItWorks />
-        <TemplatesSection />
-        <FinalCTA />
+      {/* Accessibility Skip to Main Content Link */}
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+
+      <Navbar onNavigate={navigate} currentPath={currentPath} />
+
+      <main id="main-content">
+        {currentPath === '/privacy' ? (
+          <PrivacyPolicy onNavigate={navigate} />
+        ) : currentPath === '/terms' ? (
+          <TermsOfService onNavigate={navigate} />
+        ) : currentPath === '/cookies' ? (
+          <CookiePolicy onNavigate={navigate} onOpenCookieSettings={() => setIsCookieSettingsOpen(true)} />
+        ) : currentPath === '/refunds' ? (
+          <RefundPolicy onNavigate={navigate} />
+        ) : (
+          <>
+            <Hero />
+            <AudienceFeatures />
+            <WhySiteBox />
+            <HowItWorks />
+            <TemplatesSection />
+            <FinalCTA />
+          </>
+        )}
       </main>
-      <Footer />
+
+      <Footer
+        onNavigate={navigate}
+        onOpenCookieSettings={() => setIsCookieSettingsOpen(true)}
+        onOpenContact={handleOpenContact}
+      />
+
+      {/* Accessible Cookie Consent Banner & Settings Modal */}
+      <CookieConsentBanner
+        onNavigate={navigate}
+        forceOpenSettings={isCookieSettingsOpen}
+        onCloseSettings={() => setIsCookieSettingsOpen(false)}
+      />
+
+      {/* Accessible Contact & Template Request Modal with Affirmative Consent */}
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+        onNavigate={navigate}
+        initialTopic={contactTopic}
+      />
     </>
   );
 }
+
