@@ -146,7 +146,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPath }) => {
 
   useEffect(() => {
     if (currentPath !== '/') return;
-    const sectionIds = ['why', 'workflow', 'templates', 'features'];
+    const sectionIds = ['why', 'workflow', 'templates'];
     const observers: { obs: IntersectionObserver; el: HTMLElement }[] = [];
 
     const handleIntersect = (entries: IntersectionObserverEntry[]) => {
@@ -201,7 +201,6 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPath }) => {
     { id: 'why', label: 'Why SiteBox' },
     { id: 'workflow', label: 'How it works' },
     { id: 'templates', label: 'Templates' },
-    { id: 'features', label: 'Features' },
   ];
 
   return (
