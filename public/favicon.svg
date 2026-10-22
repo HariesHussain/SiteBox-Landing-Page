@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="boxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A78BFA" />
+      <stop offset="100%" stop-color="#8B5CF6" />
+    </linearGradient>
+  </defs>
+  <!-- Main Isometric Box Face Right -->
+  <path d="M50 20 L85 38 L85 72 L50 90 Z" fill="url(#boxGrad)" opacity="0.9" />
+  <!-- Main Isometric Box Face Left -->
+  <path d="M50 20 L15 38 L15 72 L50 90 Z" fill="#7C3AED" />
+  <!-- Isometric Box Top Face -->
+  <path d="M50 20 L85 38 L50 56 L15 38 Z" fill="#C084FC" />
+  <!-- Inner Cutout/Visual Accent -->
+  <path d="M50 35 L68 44 L50 53 L32 44 Z" fill="#FBFBFE" opacity="0.8" />
+</svg>

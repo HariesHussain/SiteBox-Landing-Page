@@ -1,0 +1,11 @@
+# SiteBox Production robots.txt
+# Official Domain: https://sitebox.studio
+
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /sitemap.xml
+
+# Host and Sitemap Directives
+Host: https://sitebox.studio
+Sitemap: https://sitebox.studio/sitemap.xml
